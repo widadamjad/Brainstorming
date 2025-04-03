@@ -59,7 +59,7 @@ If you have any questions or want to collaborate, feel free to connect!
 dohaash_2002@hotmail.com
 alaa.srour0032@outlook.com
 
-****************** To run the Flutter application locally: ********************************
+******************************** To run the Flutter application locally: ********************************
 
 1. **Clone the repository**:
 
