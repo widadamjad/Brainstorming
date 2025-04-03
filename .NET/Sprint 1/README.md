@@ -28,8 +28,8 @@ The system uses a generalized Users table for all actors (Admins, Clients, Emplo
 
 Generalized Table
 sql
-نسخ
-تحرير
+
+
 Users (
     UserID INT PRIMARY KEY,
     FirstName NVARCHAR(50),
@@ -109,8 +109,8 @@ NotificationType, IssueType, Region, Province, ItemOptionType
 All have:
 
 sql
-نسخ
-تحرير
+
+
 LookupTable (
     ID INT PRIMARY KEY,
     NameEN NVARCHAR(50),
@@ -130,8 +130,8 @@ LookupTable (
 🧰 Sample Join Table Definitions
 OrderItems (M:M)
 sql
-نسخ
-تحرير
+
+
 CREATE TABLE OrderItems (
     OrderID INT FOREIGN KEY REFERENCES Orders(OrderID),
     ItemID INT FOREIGN KEY REFERENCES Items(ItemID),
@@ -140,8 +140,8 @@ CREATE TABLE OrderItems (
 )
 FavoriteItems
 sql
-نسخ
-تحرير
+
+
 CREATE TABLE FavoriteItems (
     ClientID INT FOREIGN KEY REFERENCES Clients(ClientID),
     ItemID INT FOREIGN KEY REFERENCES Items(ItemID),
@@ -149,8 +149,8 @@ CREATE TABLE FavoriteItems (
 )
 🔐 Example: Roles & Permissions
 sql
-نسخ
-تحرير
+
+
 Roles (
     RoleID INT PRIMARY KEY,
     RoleNameEN NVARCHAR(50),
@@ -173,8 +173,8 @@ RolePermissions (
 )
 📥 Contents of This Repository
 bash
-نسخ
-تحرير
+
+
 RestaurantDB/
 ├── RestaurantDB.bacpac       # SQL Server export of full normalized DB
 ├── README.md                 # This file
@@ -196,3 +196,7 @@ This database implementation fully aligns with:
 ✔️ Structure of the ER Diagram
 
 ✔️ Database schema extracted from RestaurantDB.bacpac
+
+📬 Contact If you have any questions or want to collaborate, feel free to connect! 
+qaisihabnimer@gmail.com
+zakariaath404@gmail.com
