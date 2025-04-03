@@ -177,15 +177,20 @@ bash
 
 RestaurantDB/
 ├── RestaurantDB.bacpac       # SQL Server export of full normalized DB
+
 ├── README.md                 # This file
+
 ├── ERD/                      # ER Diagram image
 │   └── ER-Diagram.png
+
 ├── BRD/
-│   ├── Capstone BRD v1.1.pdf
+│
+|   ├── Capstone BRD v1.1.pdf
 │   └── BRD Analysis.docx
 └── SQL/
     ├── CreateTables.sql      # (optional) script for schema creation
     └── SampleData.sql        # (optional) script to seed sample data
+
 ✅ Confirmed Implementation (Based on BRD & ERD)
 This database implementation fully aligns with:
 
