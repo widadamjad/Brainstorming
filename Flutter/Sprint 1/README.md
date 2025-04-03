@@ -54,10 +54,7 @@ lib/
 
 The UI was developed strictly according to the Capstone BRD (), ensuring complete alignment with business logic and system requirements.
 
-📬 Contact
-If you have any questions or want to collaborate, feel free to connect!
-dohaash_2002@hotmail.com
-alaa.srour0032@outlook.com
+
 
 ******************************** To run the Flutter application locally: ********************************
 
@@ -76,4 +73,8 @@ Navigate to the project directory:
   Run the application: flutter run
   For Packages: flutter pub get
 
-
+-------------------------------------------------------------------------------------------------------------------------
+📬 Contact
+If you have any questions or want to collaborate, feel free to connect!
+dohaash_2002@hotmail.com
+alaa.srour0032@outlook.com
