@@ -44,11 +44,11 @@ Flutter UI Developer: [Duha Abushanab, Alaa Srour]
 🗂️ Project Structure
 
 lib/
-├── screens/
-├── widgets/
-├── models/
-├── services/
-├── utils/
+├── controller/
+├── model/
+├── view/
+├── screen/
+├── widget/
 └── main.dart
 
 
