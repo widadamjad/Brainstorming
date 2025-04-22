@@ -36,14 +36,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
         elevation: 0,
         title: Row(
           children: [
@@ -56,7 +56,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   ),
                 );
               },
-              icon: Icon(Icons.location_on, color: Colors.green, size: 31),
+              icon: Icon(Icons.location_on, color: isDarkMode ? Colors.white : Colors.green, size: 31),
             ),
             SizedBox(width: 5),
             Column(
@@ -64,24 +64,24 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               children: [
                 Text(
                   AppLocalizations.of(context)!.current_location,
-                  style: TextStyle(fontSize: 15),
+                  style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black),
                 ),
                 Text(
                   "Jl. Soekarno Hatta 15A..",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
-                    color: Colors.black,
+                    color: isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
               ],
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down, color: isDarkMode ? Colors.white : Colors.black)),
             Spacer(),
             IconButton(
               icon: Icon(
                 Icons.notifications_none,
-                color: Colors.black,
+                color: isDarkMode ? Colors.white : Colors.black,
                 size: 31,
               ),
               onPressed: () {
@@ -102,8 +102,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             TextFormField(
               decoration: InputDecoration(
                 hintText:
-                    AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
-                prefixIcon: Icon(Icons.search),
+                AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
+                prefixIcon: Icon(Icons.search, color: isDarkMode ? Colors.white : Colors.black),
                 suffixIcon: IconButton(
                   onPressed: () {
                     Navigator.push(
@@ -111,13 +111,13 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       MaterialPageRoute(builder: (context) => FilterScreen()),
                     );
                   },
-                  icon: Icon(Icons.tune),
+                  icon: Icon(Icons.tune, color: isDarkMode ? Colors.white : Colors.black),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
                 ),
-                fillColor: Colors.grey[200],
+                fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
                 filled: true,
               ),
             ),
@@ -127,7 +127,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
             SizedBox(height: 10),
@@ -141,9 +141,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   FoodCard2Widget(
                     title: AppLocalizations.of(context)!.pepperoni_pizza,
                     description:
-                        AppLocalizations.of(
-                          context,
-                        )!.pepperoni_pizza_margarita_pizza_margherita_italian_cuisine_tomato,
+                    AppLocalizations.of(
+                      context,
+                    )!.pepperoni_pizza_margarita_pizza_margherita_italian_cuisine_tomato,
                     price: "29.00",
                     imagePath: "assets/images/pizza (1).png",
                     rating: 4.5,
@@ -152,9 +152,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   FoodCard2Widget(
                     title: AppLocalizations.of(context)!.pizza_cheese,
                     description:
-                        AppLocalizations.of(
-                          context,
-                        )!.food_pizza_dish_cuisine_junk_food_fast_food_flatbread_ingredient,
+                    AppLocalizations.of(
+                      context,
+                    )!.food_pizza_dish_cuisine_junk_food_fast_food_flatbread_ingredient,
                     price: "23.00",
                     imagePath: "assets/images/pizza1.png",
                     rating: 4.3,
@@ -163,9 +163,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   FoodCard2Widget(
                     title: AppLocalizations.of(context)!.peppy_paneer,
                     description:
-                        AppLocalizations.of(
-                          context,
-                        )!.chunky_paneer_with_crisp_capsicum_and_spicy_red_pepper,
+                    AppLocalizations.of(
+                      context,
+                    )!.chunky_paneer_with_crisp_capsicum_and_spicy_red_pepper,
                     price: "13.00",
                     imagePath: "assets/images/pizza2.png",
                     rating: 4.2,
@@ -174,9 +174,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   FoodCard2Widget(
                     title: AppLocalizations.of(context)!.mexican_green_wave,
                     description:
-                        AppLocalizations.of(
-                          context,
-                        )!.a_pizza_loaded_with_crunchy_onions_crisp_capsicum_juicy_tomatoes,
+                    AppLocalizations.of(
+                      context,
+                    )!.a_pizza_loaded,
                     price: "23.00",
                     imagePath: "assets/images/pizza3.png",
                     rating: 4.7,
@@ -189,7 +189,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: isDarkMode ? Colors.black : Colors.white,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(
@@ -200,9 +200,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               BottomNavItemWidget(
                 icon: Icons.home,
                 label: AppLocalizations.of(context)!.home,
-
                 isSelected: selectedIndex3 == 1,
-
                 onTap: () {
                   Navigator.push(
                     context,
@@ -214,7 +212,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               BottomNavItemWidget(
                 icon: Icons.favorite,
                 label: AppLocalizations.of(context)!.favorite,
-
                 isSelected: selectedIndex3 == 0,
                 onTap: () {
                   Navigator.push(
@@ -228,7 +225,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               BottomNavItemWidget(
                 icon: Icons.history,
                 label: AppLocalizations.of(context)!.history,
-
                 isSelected: selectedIndex3 == 3,
                 onTap: () {
                   Navigator.push(
@@ -241,7 +237,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               BottomNavItemWidget(
                 icon: Icons.person,
                 label: AppLocalizations.of(context)!.profile,
-
                 isSelected: selectedIndex3 == 4,
                 onTap: () {
                   Navigator.push(

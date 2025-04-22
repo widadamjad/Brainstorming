@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FoodCardWidget extends StatelessWidget {
   final String title;
@@ -48,7 +49,10 @@ class FoodCardWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("\$$price", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green)),
+             Text(
+                "\$$price",
+
+                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green)),
               GestureDetector(
                 onTap: onPressed,
                 child: Container(

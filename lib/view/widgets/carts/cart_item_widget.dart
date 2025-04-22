@@ -25,32 +25,39 @@ class _CartItemWidgetState extends State<CartItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final backgroundColor = theme.brightness == Brightness.dark
+        ? Colors.grey[800]
+        : Colors.white;
+    final textColor = theme.brightness == Brightness.dark ? Colors.white : Colors.black;
+    final iconColor = Colors.green; // اللون الأخضر ثابت
+
     return Dismissible(
       key: Key(
         '${widget.title}_${widget.price}_${DateTime.now().millisecondsSinceEpoch}',
       ),
       direction: DismissDirection.endToStart,
       background: Container(
-        margin:  EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: Colors.orangeAccent,
           borderRadius: BorderRadius.circular(7),
         ),
         alignment: Alignment.centerRight,
-        padding:  EdgeInsets.only(right: 20),
-        child:  Icon(Icons.delete, color: Colors.white),
+        padding: EdgeInsets.only(right: 20),
+        child: Icon(Icons.delete, color: Colors.white),
       ),
       onDismissed: (direction) => widget.onDelete(),
       confirmDismiss: (direction) async {
         return true;
       },
       child: Container(
-        margin:  EdgeInsets.symmetric(vertical: 7),
-        padding:  EdgeInsets.all(10),
+        margin: EdgeInsets.symmetric(vertical: 7),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.withOpacity(0.2)),
           borderRadius: BorderRadius.circular(7),
-          color: Colors.white,
+          color: backgroundColor,
         ),
         child: Row(
           children: [
@@ -61,34 +68,34 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,
-                errorBuilder:
-                    (context, error, stackTrace) =>
-                         Icon(Icons.fastfood, size: 60),
+                errorBuilder: (context, error, stackTrace) =>
+                    Icon(Icons.fastfood, size: 60, color: textColor),
               ),
             ),
-             SizedBox(width: 10),
+            SizedBox(width: 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     widget.title,
-                    style:  TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: textColor,
                     ),
                   ),
                   Text(
                     widget.subtitle,
                     style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                   ),
-                   SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     "\$${widget.price}",
-                    style:  TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                      color: iconColor, // اللون الأخضر ثابت هنا
                     ),
                   ),
                 ],
@@ -100,15 +107,14 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                   width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.green, width: 1),
+                    border: Border.all(color: iconColor, width: 1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: IconButton(
-                    icon:  Icon(
+                    icon: Icon(
                       Icons.remove,
                       size: 18,
-                      color: Colors.green,
+                      color: iconColor,
                     ),
                     onPressed: () {
                       setState(() {
@@ -118,26 +124,26 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                     padding: EdgeInsets.zero,
                   ),
                 ),
-                 SizedBox(width: 10),
+                SizedBox(width: 10),
                 SizedBox(
                   width: 20,
                   child: Text(
                     quantity.toString(),
                     textAlign: TextAlign.center,
-                    style:  TextStyle(fontSize: 16, color: Colors.black),
+                    style: TextStyle(fontSize: 16, color: textColor),
                   ),
                 ),
-                 SizedBox(width: 10),
+                SizedBox(width: 10),
                 Container(
                   width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: Colors.green,
-                    border: Border.all(color: Colors.green, width: 1),
+                    color: iconColor, // اللون الأخضر ثابت هنا أيضًا
+                    border: Border.all(color: iconColor, width: 1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: IconButton(
-                    icon:  Icon(Icons.add, size: 18, color: Colors.white),
+                    icon: Icon(Icons.add, size: 18, color: Colors.white),
                     onPressed: () {
                       setState(() {
                         quantity++;

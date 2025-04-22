@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 class CreditCardWidget extends StatefulWidget {
   final String cardHolderName;
@@ -34,13 +37,17 @@ class _CreditCardWidgetState extends State<CreditCardWidget> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children:  [
               Text(
-                "Finaci",
+                AppLocalizations.of(
+                  context,
+                )!.finance,
                 style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Text(
-                "VISA",
+                AppLocalizations.of(
+                  context,
+                )!.visa,
                 style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
@@ -56,10 +63,11 @@ class _CreditCardWidgetState extends State<CreditCardWidget> {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
+                children: [ Padding(
                     padding: EdgeInsets.only(top: 25),
-                    child: Text("Card Holder Name", style: TextStyle(color: Colors.white54, fontSize: 14)),
+                    child: Text( AppLocalizations.of(
+                      context,
+                    )!.card_holder_name, style: TextStyle(color: Colors.white54, fontSize: 14)),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -71,7 +79,9 @@ class _CreditCardWidgetState extends State<CreditCardWidget> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text("Expiry Date", style: TextStyle(color: Colors.white54, fontSize: 14)),
+                   Text( AppLocalizations.of(
+                    context,
+                  )!.expire_date, style: TextStyle(color: Colors.white54, fontSize: 14)),
                   const SizedBox(height: 4),
                   Text(
                     widget.expiryDate.isEmpty ? "02/30" : widget.expiryDate,

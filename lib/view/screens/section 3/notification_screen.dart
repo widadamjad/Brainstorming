@@ -69,6 +69,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     List<NotificationModel> filteredNotifications = notifications;
     if (selectedTab == 1) {
       filteredNotifications = notifications.where((n) => n.unread).toList();
@@ -80,7 +82,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
         elevation: 0,
         title: Row(
           children: [
@@ -143,7 +145,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
                 ),
-                fillColor: Colors.grey[200],
+                fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
                 filled: true,
               ),
             ),
@@ -189,11 +191,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       borderRadius: BorderRadius.circular(4),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
+                          color: isDarkMode ? Colors.grey.withOpacity(0.4) : Colors.grey.withOpacity(0.2),
                           spreadRadius: 1,
                           blurRadius: 5,
                         ),
                       ],
+                      color: isDarkMode ? Colors.grey[850] : Colors.white,
                     ),
                     child: Row(
                       children: [
@@ -213,13 +216,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             children: [
                               Text(
                                 notification.title,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
+                                  color: isDarkMode ? Colors.white : Colors.black,
                                 ),
                               ),
                               const SizedBox(height: 4),
-                              Text(notification.message),
+                              Text(
+                                notification.message,
+                                style: TextStyle(
+                                  color: isDarkMode ? Colors.white70 : Colors.black87,
+                                ),
+                              ),
                               const SizedBox(height: 4),
                               Text(
                                 notification.time,

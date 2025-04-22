@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../detail_cart_row_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 class CartTotalWidget extends StatelessWidget {
   final double subtotal;
@@ -18,58 +21,79 @@ class CartTotalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final total = subtotal + delivery - discount;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : Colors.black;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        image: DecorationImage(
+        image: const DecorationImage(
           image: AssetImage("assets/images/card.total.png"),
           fit: BoxFit.cover,
         ),
+        color: isDark ? Colors.grey[900] : Colors.white,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.green, width: 1.5),
       ),
       child: Column(
         children: [
           DetailCartRow(
-            label: "Sub-total",
+            label:  AppLocalizations.of(
+              context,
+            )!.sub_total,
             value: "\$${subtotal.toStringAsFixed(2)}",
+            labelColor: textColor,
+            valueColor: textColor,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           DetailCartRow(
-            label: "Delivery",
+            label:  AppLocalizations.of(
+              context,
+            )!.delivery_charge,
             value: "\$${delivery.toStringAsFixed(2)}",
+            labelColor: textColor,
+            valueColor: textColor,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           DetailCartRow(
-            label: "Discount",
+            label:  AppLocalizations.of(
+              context,
+            )!.discount,
             value: "\$${discount.toStringAsFixed(2)}",
+            labelColor: textColor,
+            valueColor: textColor,
           ),
           Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: DetailCartRow(
-              label: "TOTAL",
+              label:  AppLocalizations.of(
+                context,
+              )!.total,
               value: "\$${total.toStringAsFixed(2)}",
               isTotal: true,
+              labelColor: textColor,
+              valueColor: textColor,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(vertical: 16),
+                backgroundColor: isDark ? Colors.green[400] : Colors.white,
+                foregroundColor: isDark ? Colors.black : Colors.green,
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 elevation: 3,
               ),
               onPressed: onOrderPressed,
-              child: Text(
-                "Place My Order",
+              child:  Text(
+                AppLocalizations.of(
+                  context,
+                )!.place_my_order,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

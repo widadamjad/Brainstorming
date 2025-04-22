@@ -17,10 +17,6 @@ import 'filter_screen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
-
-
-
 class HomeScreen extends StatefulWidget {
   final LatLng? userLocation;
   final String? addressText;
@@ -54,8 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (placemarks.isNotEmpty) {
           final place = placemarks.first;
           setState(() {
-            locationAddress =
-                "${place.street}, ${place.subLocality}, ${place.locality}";
+            locationAddress = "${place.street}, ${place.subLocality}, ${place.locality}";
           });
         }
       } catch (e) {
@@ -85,11 +80,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bgColor = isDark ? Colors.black : Colors.white;
+    final textColor = isDark ? Colors.white : Colors.black;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: bgColor,
         elevation: 0,
         automaticallyImplyLeading: false,
         titleSpacing: 0,
@@ -104,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.location_on,
                 color: Colors.green,
                 size: 28,
@@ -116,14 +114,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.current_location,
-                    style: TextStyle(fontSize: 13),
+                    style: TextStyle(fontSize: 13, color: textColor),
                   ),
                   Text(
                     locationAddress,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: textColor,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -131,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.notifications_none, color: Colors.black),
+              icon: Icon(Icons.notifications_none, color: textColor),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -146,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -154,28 +152,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: double.infinity,
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText:
-                        AppLocalizations.of(
-                          context,
-                        )!.search_menu_restaurant_or_etc,
+                    hintText: AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
                     prefixIcon: Icon(Icons.search),
                     suffixIcon: IconButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => FilterScreen(),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => FilterScreen()));
                       },
-                      icon: IconButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>FilterScreen()));
-                      }, icon: Icon(Icons.tune)),                    ),
+                      icon: Icon(Icons.tune),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
                     ),
-                    fillColor: Colors.grey[200],
+                    fillColor: isDark ? Colors.grey[800] : Colors.grey[200],
                     filled: true,
                   ),
                 ),
@@ -194,34 +183,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: '🍔 ${AppLocalizations.of(context)!.burger}',
                       isSelected: selectedIndex == 1,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => OrderDetailsScreen(),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetailsScreen()));
                         onItemTapped(1);
                       },
                     ),
-
                     CategoryButtonWidget(
                       title: '🍕  ${AppLocalizations.of(context)!.pizza}',
-                      // icon: Icons.local_pizza,
                       isSelected: selectedIndex == 2,
-                      onPressed:
-                          () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PizzaScreen(),
-                              ),
-                            ),
-                            onItemTapped(2),
-                          },
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PizzaScreen()));
+                        onItemTapped(2);
+                      },
                     ),
                     CategoryButtonWidget(
                       title: '🌭 ${AppLocalizations.of(context)!.sandwich}',
-                      //  icon: Icons.fastfood,
                       isSelected: selectedIndex == 3,
                       onPressed: () => onItemTapped(3),
                     ),
@@ -244,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   children: List.generate(
                     5,
-                    (index) => Image.asset(
+                        (index) => Image.asset(
                       "assets/images/offer.pizza.png",
                       fit: BoxFit.fill,
                     ),
@@ -256,24 +231,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   5,
-                  (index) => Container(
+                      (index) => Container(
                     margin: EdgeInsets.symmetric(horizontal: 4),
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color:
-                          currentPage == index
-                              ? Colors.green
-                              : Colors.grey[300],
+                      color: currentPage == index ? Colors.green : Colors.grey[300],
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 10),
               Text(
-                  AppLocalizations.of(context)!.top_rated,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                AppLocalizations.of(context)!.top_rated,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: textColor),
               ),
               SizedBox(height: 5),
               SizedBox(
@@ -283,30 +255,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     FoodCardWidget(
                       title: AppLocalizations.of(context)!.chicken_burger,
-                      description:AppLocalizations.of(context)!.key_100_gr_chicken___tomato___cheese_lettuce,
+                      description: AppLocalizations.of(context)!.key_100_gr_chicken,
                       price: "20.00",
                       imagePath: "assets/images/burger1.png",
                       rating: 3.8,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => OrderDetailsScreen(),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetailsScreen()));
                       },
                     ),
                     FoodCardWidget(
                       title: AppLocalizations.of(context)!.cheese_burger,
-                      description:
-                      AppLocalizations.of(context)!.key_100_gr_meat___onion___tomato___lettuce_cheese,                      price: "15.00",
+                      description: AppLocalizations.of(context)!.key_100_gr_meat_onion,
+                      price: "15.00",
                       imagePath: "assets/images/burger2.png",
                       rating: 4.5,
                       onPressed: () {},
                     ),
                     FoodCardWidget(
                       title: AppLocalizations.of(context)!.chicken_burger,
-                      description: AppLocalizations.of(context)!.key_100_gr_meat___onion___tomato___lettuce_cheese,
+                      description: AppLocalizations.of(context)!.key_100_gr_chicken,
                       price: "20.00",
                       imagePath: "assets/images/burger1.png",
                       rating: 3.8,
@@ -314,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     FoodCardWidget(
                       title: AppLocalizations.of(context)!.cheese_burger,
-                      description: AppLocalizations.of(context)!.key_100_gr_meat___onion___tomato___lettuce_cheese,
+                      description: AppLocalizations.of(context)!.key_100_gr_meat_onion,
                       price: "20.00",
                       imagePath: "assets/images/burger2.png",
                       rating: 3.8,
@@ -328,13 +295,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                  AppLocalizations.of(context)!.recommend,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    AppLocalizations.of(context)!.recommend,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
                   ),
                   TextButton(
                     onPressed: () {},
                     child: Text(
-                        AppLocalizations.of(context)!.view_all,
+                      AppLocalizations.of(context)!.view_all,
                       style: TextStyle(color: Colors.green, fontSize: 14),
                     ),
                   ),
@@ -345,22 +312,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    RecommendedCardWidget(
-                      imagePath: "assets/images/suchi.png",
-                      price: "\$103.0",
-                    ),
-                    RecommendedCardWidget(
-                      imagePath: "assets/images/rice.png",
-                      price: "\$50.0",
-                    ),
-                    RecommendedCardWidget(
-                      imagePath: "assets/images/pasta.png",
-                      price: "\$12.99",
-                    ),
-                    RecommendedCardWidget(
-                      imagePath: "assets/images/cake.png",
-                      price: "\$8.20",
-                    ),
+                    RecommendedCardWidget(imagePath: "assets/images/suchi.png", price: "\$103.0"),
+                    RecommendedCardWidget(imagePath: "assets/images/rice.png", price: "\$50.0"),
+                    RecommendedCardWidget(imagePath: "assets/images/pasta.png", price: "\$12.99"),
+                    RecommendedCardWidget(imagePath: "assets/images/cake.png", price: "\$8.20"),
                   ],
                 ),
               ),
@@ -369,7 +324,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: bgColor,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(
@@ -378,30 +333,24 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BottomNavItemWidget(
-
                 icon: Icons.home,
                 label: AppLocalizations.of(context)!.home,
-
                 isSelected: selectedIndex2 == 0,
                 onTap: () => onItemTapped2(0),
               ),
               BottomNavItemWidget(
-
                 icon: Icons.favorite,
                 label: AppLocalizations.of(context)!.favorite,
-
                 isSelected: selectedIndex2 == 1,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesScreen()));
                   onItemTapped2(1);
                 },
               ),
-              const SizedBox(width: 40), // space for FAB
+              const SizedBox(width: 40), // FAB space
               BottomNavItemWidget(
-
                 icon: Icons.history,
                 label: AppLocalizations.of(context)!.history,
-
                 isSelected: selectedIndex2 == 3,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryScreen()));
@@ -409,10 +358,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               BottomNavItemWidget(
-
                 icon: Icons.person,
                 label: AppLocalizations.of(context)!.profile,
-
                 isSelected: selectedIndex2 == 4,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
@@ -423,22 +370,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-
-
-
-
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DeleteCartScreen()),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DeleteCartScreen()));
           onItemTapped2(2);
         },
         child: const Icon(Icons.shopping_cart, color: Colors.white, size: 30),
       ),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

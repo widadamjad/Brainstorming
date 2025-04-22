@@ -65,7 +65,7 @@ class _CongraScreenState extends State<CongraScreen> {
                 ),
 
                 Text(
-                    AppLocalizations.of(context)!.password_reset_successfully,
+                  AppLocalizations.of(context)!.password_reset_successfully,
                   style: TextStyle(fontSize: 20, color: Colors.white70),
                 ),
 

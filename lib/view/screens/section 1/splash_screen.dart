@@ -34,23 +34,23 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body: Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/foodtek.png"),
-          fit: BoxFit.cover,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/foodtek.png"),
+            fit: BoxFit.cover,
+          ),
         ),
+        //   child: Container(
+        //     decoration: BoxDecoration(
+        //       image: DecorationImage(
+        //         image: AssetImage("assets/images/foodtek.png"),
+        //         fit: BoxFit.cover,
+        //       ),
+        //     ),
+        //   ),
+        //
       ),
-    //   child: Container(
-    //     decoration: BoxDecoration(
-    //       image: DecorationImage(
-    //         image: AssetImage("assets/images/foodtek.png"),
-    //         fit: BoxFit.cover,
-    //       ),
-    //     ),
-    //   ),
-    //
-    ),
 
 
     );

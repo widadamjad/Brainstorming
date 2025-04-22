@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';  // إضافة Provider
 
 import 'package:foodtek/view/screens/section%203/favorites_screen.dart';
 import 'package:foodtek/view/screens/section%203/home_screen.dart';
@@ -8,6 +9,7 @@ import 'package:foodtek/view/screens/section%204/history_screen.dart';
 import 'package:foodtek/view/screens/section%206/profile_screen.dart';
 import 'package:foodtek/view/screens/section%206/track_location_screen.dart';
 
+import '../../../core/theme_provider.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -18,14 +20,12 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  // bottom‑nav state
   int selectedIndex = 0;
 
   void onItemTapped(int index) {
     setState(() => selectedIndex = index);
   }
 
-  // chat messages
   final List<Map<String, String>> messages = [
     {"text": "Hello chatGPT, how are you today?", "sender": "user"},
     {"text": "Hello, I'm fine, how can I help you?", "sender": "bot"},
@@ -47,12 +47,15 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.isDarkMode;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
       appBar: AppBar(
         title:  Text(AppLocalizations.of(context)!.chat),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+        foregroundColor: isDarkMode ? Colors.white : Colors.black,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -77,13 +80,13 @@ class _ChatScreenState extends State<ChatScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                     constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
                     decoration: BoxDecoration(
-                      color: isUser ? Colors.green : Colors.grey[200],
+                      color: isUser ? Colors.green : (isDarkMode ? Colors.grey[700] : Colors.grey[200]),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       msg['text']!,
                       style: TextStyle(
-                        color: isUser ? Colors.white : Colors.grey.shade600,
+                        color: isUser ? Colors.white : (isDarkMode ? Colors.white70 : Colors.grey.shade600),
                         fontSize: 14,
                       ),
                     ),
@@ -101,12 +104,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     controller: _controller,
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.write_your_message,
-                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      hintStyle: TextStyle(color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade600),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
                       ),
-                      fillColor: Colors.grey[200],
+                      fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
                       filled: true,
                       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     ),
@@ -133,7 +136,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8,
         child: SizedBox(

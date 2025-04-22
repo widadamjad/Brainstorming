@@ -54,62 +54,81 @@ class _DetailProfileScreenState extends State<DetailProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final profileController = Provider.of<ProfileController>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(" Profile"),
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        title: Text(
+            AppLocalizations.of(
+              context,
+            )!.profile, style: TextStyle(color: isDarkMode ? Colors.white : Colors.black)),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: CircleAvatar(
                 radius: 50,
-                backgroundImage: const AssetImage("assets/images/profile.png"),
+                backgroundImage: AssetImage("assets/images/profile.png"),
               ),
             ),
             const SizedBox(height: 10),
             Center(
               child: Text(profileController.username,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
             ),
             Center(
               child: Text(profileController.email,
-                  style: const TextStyle(fontSize: 14, color: Colors.grey)),
+                  style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white70 : Colors.grey)),
             ),
             const SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isDarkMode ? Colors.grey[850] : Colors.white,
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
+                    color: isDarkMode ? Colors.white30 : Colors.grey.withOpacity(0.3),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: const Offset(0, 3),
+                    offset: Offset(0, 3),
                   ),
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding:  EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    _buildTextField("Username", _usernameController, (val) => profileController.updateUsername(val)),
-                    _buildTextField("Email", _emailController, (val) => profileController.updateEmail(val)),
-                    _buildTextField("Phone Number", _phoneController, (val) => profileController.updatePhoneNumber(val)),
-                    _buildTextField("Password", _passwordController, (val) => profileController.updatePassword(val), isPassword: true),
-                    _buildTextField("Address", _addressController, (val) => profileController.updateAddress(val)),
+                    _buildTextField(
+                        AppLocalizations.of(
+                          context,
+                        )!.user_name, _usernameController, (val) => profileController.updateUsername(val), isDarkMode: isDarkMode),
+                    _buildTextField(
+                        AppLocalizations.of(
+                          context,
+                        )!.email, _emailController, (val) => profileController.updateEmail(val), isDarkMode: isDarkMode),
+                    _buildTextField(
+                        AppLocalizations.of(
+                          context,
+                        )!.phone_number, _phoneController, (val) => profileController.updatePhoneNumber(val), isDarkMode: isDarkMode),
+                    _buildTextField(
+                        AppLocalizations.of(
+                          context,
+                        )!.password, _passwordController, (val) => profileController.updatePassword(val), isPassword: true, isDarkMode: isDarkMode),
+                    _buildTextField(
+                        AppLocalizations.of(
+                          context,
+                        )!.address, _addressController, (val) => profileController.updateAddress(val), isDarkMode: isDarkMode),
                   ],
                 ),
               ),
@@ -120,16 +139,19 @@ class _DetailProfileScreenState extends State<DetailProfileScreen> {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                  padding:  EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                 ),
-                child: const Text("Update", style: TextStyle(color: Colors.white)),
+                child:  Text(
+                    AppLocalizations.of(
+                      context,
+                    )!.update, style: TextStyle(color: Colors.white)),
               ),
             ),
           ],
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: isDarkMode ? Colors.black : Colors.white,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8,
         child: SizedBox(
@@ -191,7 +213,7 @@ class _DetailProfileScreenState extends State<DetailProfileScreen> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller, Function(String) onChanged, {bool isPassword = false}) {
+  Widget _buildTextField(String label, TextEditingController controller, Function(String) onChanged, {bool isPassword = false, bool isDarkMode = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 7),
       child: TextField(
@@ -199,13 +221,13 @@ class _DetailProfileScreenState extends State<DetailProfileScreen> {
         decoration: InputDecoration(
           labelText: label,
           filled: true,
-          fillColor: Colors.white,
+          fillColor: isDarkMode ? Colors.grey[800] : Colors.white,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.grey, width: 1),
+            borderSide: BorderSide(color: isDarkMode ? Colors.white70 : Colors.grey, width: 1),
           ),
         ),
         controller: controller,

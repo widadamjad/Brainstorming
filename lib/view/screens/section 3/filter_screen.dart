@@ -9,8 +9,6 @@ import 'home_screen.dart';
 import 'notification_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
-
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
 
@@ -33,25 +31,33 @@ class _FilterScreenState extends State<FilterScreen> {
   double maxDiscount = 50;
   int selectedLocation = 1;
 
-  List<String> categories = ["Fast Food", "Sea Food", "Dessert"];
   String selectedCategory = "Sea Food";
-
-  List<String> dishes = [
-    "Tuna Tartare",
-    "Spicy Crab Cakes",
-    "Seafood Paella",
-    "Clam Chowder",
-    "Miso-Glazed Cod",
-    "Lobster Thermidor",
-  ];
   String selectedDish = "Spicy Crab Cakes";
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    // Initialize lists inside the build method, where context is available
+    List<String> categories = [
+      AppLocalizations.of(context)!.fast_food,
+      AppLocalizations.of(context)!.sea_food,
+      AppLocalizations.of(context)!.dessert
+    ];
+
+    List<String> dishes = [
+      AppLocalizations.of(context)!.tuna_tartare,
+      AppLocalizations.of(context)!.spicy_crab_cakes,
+      AppLocalizations.of(context)!.seafood_paella,
+      AppLocalizations.of(context)!.clam_chowder,
+      AppLocalizations.of(context)!.miso_glazed_cod,
+      AppLocalizations.of(context)!.lobster_thermidor
+    ];
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
         elevation: 0,
         title: Row(
           children: [
@@ -64,29 +70,29 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
                 );
               },
-              icon: Icon(Icons.location_on, color: Colors.green, size: 31),
+              icon: Icon(Icons.location_on, color: isDarkMode ? Colors.white : Colors.green, size: 31),
             ),
             SizedBox(width: 5),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context)!.current_location, style: TextStyle(fontSize: 15)),
+                Text(AppLocalizations.of(context)!.current_location, style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black)),
                 Text(
                   "Jl. Soekarno Hatta 15A..",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
-                    color: Colors.black,
+                    color: isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
               ],
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down, color: isDarkMode ? Colors.white : Colors.black)),
             Spacer(),
             IconButton(
               icon: Icon(
                 Icons.notifications_none,
-                color: Colors.black,
+                color: isDarkMode ? Colors.white : Colors.black,
                 size: 31,
               ),
               onPressed: () {
@@ -100,7 +106,7 @@ class _FilterScreenState extends State<FilterScreen> {
         ),
       ),
       body: Container(
-        color: Colors.white,
+        color: isDarkMode ? Colors.black : Colors.white,
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -108,13 +114,13 @@ class _FilterScreenState extends State<FilterScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                AppLocalizations.of(context)!.filter,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.filter,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
                 ),
                 SizedBox(height: 6),
                 Text(
-                    AppLocalizations.of(context)!.price_range,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.price_range,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
                 ),
                 SizedBox(height: 10),
                 Row(
@@ -122,7 +128,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: isDarkMode ? Colors.grey[800] : Colors.white,
                           border: Border.all(
                             color: Colors.grey.withOpacity(0.2),
                           ),
@@ -135,6 +141,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 10,
                             ),
+                            hintStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
                           ),
                         ),
                       ),
@@ -143,7 +150,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: isDarkMode ? Colors.grey[800] : Colors.white,
                           border: Border.all(
                             color: Colors.grey.withOpacity(0.2),
                           ),
@@ -156,6 +163,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 10,
                             ),
+                            hintStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
                           ),
                         ),
                       ),
@@ -166,8 +174,8 @@ class _FilterScreenState extends State<FilterScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("\$0", style: TextStyle(color: Colors.grey)),
-                    Text("\$10", style: TextStyle(color: Colors.grey)),
+                    Text("\$0", style: TextStyle(color: isDarkMode ? Colors.white : Colors.grey)),
+                    Text("\$10", style: TextStyle(color: isDarkMode ? Colors.white : Colors.grey)),
                   ],
                 ),
                 RangeSlider(
@@ -183,8 +191,8 @@ class _FilterScreenState extends State<FilterScreen> {
                   },
                 ),
                 Text(
-                    AppLocalizations.of(context)!.discount,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.discount,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
                 ),
                 SizedBox(height: 5),
                 Row(
@@ -192,7 +200,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: isDarkMode ? Colors.grey[800] : Colors.white,
                           border: Border.all(
                             color: Colors.grey.withOpacity(0.2),
                           ),
@@ -205,6 +213,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 10,
                             ),
+                            hintStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
                           ),
                         ),
                       ),
@@ -213,7 +222,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: isDarkMode ? Colors.grey[800] : Colors.white,
                           border: Border.all(
                             color: Colors.grey.withOpacity(0.2),
                           ),
@@ -226,6 +235,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: 10,
                             ),
+                            hintStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
                           ),
                         ),
                       ),
@@ -235,8 +245,8 @@ class _FilterScreenState extends State<FilterScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("\$0", style: TextStyle(color: Colors.grey)),
-                    Text("50%", style: TextStyle(color: Colors.grey)),
+                    Text("\$0", style: TextStyle(color: isDarkMode ? Colors.white : Colors.grey)),
+                    Text("50%", style: TextStyle(color: isDarkMode ? Colors.white : Colors.grey)),
                   ],
                 ),
                 Slider(
@@ -252,102 +262,96 @@ class _FilterScreenState extends State<FilterScreen> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                    AppLocalizations.of(context)!.category,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.category,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
                 ),
                 Wrap(
                   spacing: 10,
-                  children:
-                      categories.map((category) {
-                        return ChoiceChip(
-                          label: Text(category),
-                          selected: selectedCategory == category,
-                          selectedColor: Colors.green,
-                          backgroundColor: Colors.grey.withOpacity(0.2),
-                          labelStyle: TextStyle(
-                            color:
-                                selectedCategory == category
-                                    ? Colors.white
-                                    : Colors.black,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          showCheckmark: false,
-                          onSelected: (bool selected) {
-                            setState(() {
-                              selectedCategory = category;
-                            });
-                          },
-                        );
-                      }).toList(),
+                  children: categories.map((category) {
+                    return ChoiceChip(
+                      label: Text(category),
+                      selected: selectedCategory == category,
+                      selectedColor: Colors.green,
+                      backgroundColor: isDarkMode ? Colors.grey[700] : Colors.grey.withOpacity(0.2),
+                      labelStyle: TextStyle(
+                        color: selectedCategory == category
+                            ? Colors.white
+                            : isDarkMode ? Colors.white : Colors.black,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      showCheckmark: false,
+                      onSelected: (bool selected) {
+                        setState(() {
+                          selectedCategory = category;
+                        });
+                      },
+                    );
+                  }).toList(),
                 ),
                 SizedBox(height: 10),
                 Text(
-                    AppLocalizations.of(context)!.location,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.location,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
                 ),
                 Wrap(
                   spacing: 8,
-                  children:
-                      [1, 5, 10].map((km) {
-                        return ChoiceChip(
-                          label: Text('${km} ${AppLocalizations.of(context)!.km}'),
-                          selected: selectedLocation == km,
-                          selectedColor: Colors.green,
-                          backgroundColor: Colors.grey.withOpacity(0.2),
-                          labelStyle: TextStyle(
-                            color:
-                                selectedLocation == km
-                                    ? Colors.white
-                                    : Colors.black,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          showCheckmark: false,
-                          onSelected: (bool selected) {
-                            setState(() {
-                              selectedLocation = km;
-                            });
-                          },
-                        );
-                      }).toList(),
+                  children: [1, 5, 10].map((km) {
+                    return ChoiceChip(
+                      label: Text('${km} ${AppLocalizations.of(context)!.km}'),
+                      selected: selectedLocation == km,
+                      selectedColor: Colors.green,
+                      backgroundColor: isDarkMode ? Colors.grey[700] : Colors.grey.withOpacity(0.2),
+                      labelStyle: TextStyle(
+                        color: selectedLocation == km
+                            ? Colors.white
+                            : isDarkMode ? Colors.white : Colors.black,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      showCheckmark: false,
+                      onSelected: (bool selected) {
+                        setState(() {
+                          selectedLocation = km;
+                        });
+                      },
+                    );
+                  }).toList(),
                 ),
                 SizedBox(height: 10),
                 Text(
-                    AppLocalizations.of(context)!.dish,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.dish,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
                 ),
                 Wrap(
                   spacing: 20,
-                  children:
-                      dishes.map((dish) {
-                        return ChoiceChip(
-                          label: Text(dish),
-                          selected: selectedDish == dish,
-                          selectedColor: Colors.green,
-                          backgroundColor: Colors.grey.withOpacity(0.2),
-                          labelStyle: TextStyle(
-                            color:
-                                selectedDish == dish
-                                    ? Colors.white
-                                    : Colors.black,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          showCheckmark: false,
-                          onSelected: (bool selected) {
-                            setState(() {
-                              selectedDish = dish;
-                            });
-                          },
-                        );
-                      }).toList(),
+                  children: dishes.map((dish) {
+                    return ChoiceChip(
+                      label: Text(dish),
+                      selected: selectedDish == dish,
+                      selectedColor: Colors.green,
+                      backgroundColor: isDarkMode ? Colors.grey[700] : Colors.grey.withOpacity(0.2),
+                      labelStyle: TextStyle(
+                        color: selectedDish == dish
+                            ? Colors.white
+                            : isDarkMode ? Colors.white : Colors.black,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      showCheckmark: false,
+                      onSelected: (bool selected) {
+                        setState(() {
+                          selectedDish = dish;
+                        });
+                      },
+                    );
+                  }).toList(),
                 ),
               ],
             ),
@@ -355,7 +359,7 @@ class _FilterScreenState extends State<FilterScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: isDarkMode ? Colors.black : Colors.white,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(
@@ -364,18 +368,20 @@ class _FilterScreenState extends State<FilterScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BottomNavItemWidget(
-
                 icon: Icons.home,
                 label: AppLocalizations.of(context)!.home,
-
                 isSelected: selectedIndex2 == 0,
-                onTap: () => onItemTapped2(0),
+                onTap: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  ),
+                  onItemTapped2(0),
+                },
               ),
               BottomNavItemWidget(
-
                 icon: Icons.favorite,
                 label: AppLocalizations.of(context)!.favorite,
-
                 isSelected: selectedIndex2 == 1,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesScreen()));
@@ -384,10 +390,8 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
               const SizedBox(width: 40), // space for FAB
               BottomNavItemWidget(
-
                 icon: Icons.history,
                 label: AppLocalizations.of(context)!.history,
-
                 isSelected: selectedIndex2 == 3,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryScreen()));
@@ -395,10 +399,8 @@ class _FilterScreenState extends State<FilterScreen> {
                 },
               ),
               BottomNavItemWidget(
-
                 icon: Icons.person,
                 label: AppLocalizations.of(context)!.profile,
-
                 isSelected: selectedIndex2 == 4,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
@@ -410,17 +412,15 @@ class _FilterScreenState extends State<FilterScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed:
-            () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DeleteCartScreen()),
-              ),
-
-              onItemTapped2(2),
-            },
+        onPressed: () => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DeleteCartScreen()),
+          ),
+          onItemTapped2(2),
+        },
         backgroundColor: Colors.green,
-        child: const Icon(Icons.shopping_cart, color: Colors.white, size: 30),
+        child: Icon(Icons.shopping_cart, color: Colors.white, size: 30),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

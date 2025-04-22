@@ -8,7 +8,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../controller/lang_controller.dart';
 
-
 class Intro2Screen extends StatefulWidget {
   const Intro2Screen({super.key});
 
@@ -21,8 +20,10 @@ class _Intro2ScreenState extends State<Intro2Screen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Column(
         children: [
           Expanded(
@@ -35,14 +36,21 @@ class _Intro2ScreenState extends State<Intro2Screen> {
                   SizedBox(height: 20),
                   Text(
                     AppLocalizations.of(context)!.get_delivery_on_time,
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
                   ),
                   SizedBox(height: 10),
                   Text(
                     AppLocalizations.of(context)!
                         .order_your_favorite_food_with_in_the_plam_of_your_handand_the_zone_of_your_comfort,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
+                    ),
                   ),
                   SizedBox(height: 70),
                   TextButton(
@@ -69,14 +77,11 @@ class _Intro2ScreenState extends State<Intro2Screen> {
               ),
             ),
           ),
-
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -87,10 +92,12 @@ class _Intro2ScreenState extends State<Intro2Screen> {
                   },
                   child: Text(
                     "Skip",
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: isDarkMode ? Colors.white : Colors.grey,
+                    ),
                   ),
                 ),
-
                 SmoothPageIndicator(
                   controller: _controller,
                   count: 2,
@@ -100,8 +107,6 @@ class _Intro2ScreenState extends State<Intro2Screen> {
                     dotWidth: 8,
                   ),
                 ),
-
-
                 IconButton(
                   icon: Icon(
                       Icons.arrow_forward, color: Colors.green, size: 28),

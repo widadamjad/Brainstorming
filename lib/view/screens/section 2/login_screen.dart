@@ -14,14 +14,15 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailTextEditingController =
-      TextEditingController();
+  TextEditingController();
   final TextEditingController passTextEditingController =
-      TextEditingController();
+  TextEditingController();
   bool RememberMe = false;
 
   @override
   Widget build(BuildContext context) {
     final loginController = Provider.of<LoginController>(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       body: Stack(
@@ -34,14 +35,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-
           Center(
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
               width: MediaQuery.of(context).size.width * 0.85,
               height: MediaQuery.of(context).size.height * 0.69,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isDark ? Colors.grey[900] : Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -50,10 +50,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.login,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 34),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 34,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
                   ),
                   SizedBox(height: 2),
-
                   TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -63,13 +66,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: RichText(
                       text: TextSpan(
-                        style: TextStyle(color: Colors.black, fontSize: 14),
+                        style: TextStyle(
+                          color: isDark ? Colors.white : Colors.black,
+                          fontSize: 14,
+                        ),
                         children: [
                           TextSpan(
-                            text:
-                                AppLocalizations.of(
-                                  context,
-                                )!.dont_have_an_account,
+                            text: AppLocalizations.of(context)!
+                                .dont_have_an_account,
+                          ),
+                          TextSpan(
+                            text: " ",
                           ),
                           TextSpan(
                             text: AppLocalizations.of(context)!.sign_up,
@@ -82,9 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-
                   SizedBox(height: 6),
-
                   Consumer<LoginController>(
                     builder: (context, loginController, child) {
                       return InputWidget(
@@ -92,30 +97,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         textEditingController: emailTextEditingController,
                         label: AppLocalizations.of(context)!.email,
                         hintText: "Loisbakit@gmail.com",
-                        errorText:
-                            loginController.showErrorEmail
-                                ? "Enter a valid Email"
-                                : null,
+                        errorText: loginController.showErrorEmail
+                            ?  AppLocalizations.of(
+                          context,
+                        )!.enter_a_valid_email
+                            : null,
                       );
                     },
                   ),
-
-                  SizedBox(height: 15),
-
+                  SizedBox(height: 10),
                   TextFormField(
                     controller: passTextEditingController,
                     obscureText: loginController.obscureTextPassword,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: isDark ? Colors.grey[800] : Colors.white,
                       labelText: AppLocalizations.of(context)!.password,
+                      labelStyle: TextStyle(
+                        color: isDark ? Colors.white : null,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      // errorText:
-                      //     loginController.showErrorPassword
-                      //         ? "Enter Your Password"
-                      //         : null,
                       suffixIcon: IconButton(
                         onPressed: () {
                           loginController.changeObscureTextPassword();
@@ -124,13 +127,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           loginController.obscureTextPassword
                               ? Icons.visibility
                               : Icons.visibility_off,
+                          color: isDark ? Colors.white : null,
                         ),
                       ),
                     ),
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
                   ),
-
                   SizedBox(height: 5),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -145,10 +150,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             activeColor: Colors.green,
                           ),
-                          Text(AppLocalizations.of(context)!.remember_me),
+                          Text(
+                            AppLocalizations.of(context)!.remember_me,
+                            style: TextStyle(
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
                         ],
                       ),
-
                       TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -165,9 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-
-                  SizedBox(height: 7),
-
+                  SizedBox(height: 5),
                   TextButton(
                     onPressed: () {
                       loginController.checkEmail(
@@ -200,82 +207,77 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 10),
-
+                  SizedBox(height: 7),
                   Text(
                     AppLocalizations.of(context)!.or,
-                    style: TextStyle(color: Colors.grey, fontSize: 16),
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                    ),
                   ),
-
-                  SizedBox(height: 6),
-
+                  SizedBox(height: 5),
                   ElevatedButton.icon(
-                    onPressed: () {
-                      //add gmail here
-                    },
+                    onPressed: () {},
                     icon: Icon(Icons.g_mobiledata_outlined, color: Colors.red),
                     label: Text(
                       AppLocalizations.of(context)!.continue_with_google,
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor:
+                      isDark ? Colors.grey[850] : Colors.white,
                       padding: EdgeInsets.symmetric(
                         horizontal: 30,
                         vertical: 12,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
-                        side: BorderSide(color: Colors.white),
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 6),
-
+                  SizedBox(height: 5),
                   ElevatedButton.icon(
-                    onPressed: () {
-                      //add facebook here
-                    },
+                    onPressed: () {},
                     icon: Icon(Icons.facebook, color: Colors.blue),
                     label: Text(
                       AppLocalizations.of(context)!.continue_with_facebook,
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor:
+                      isDark ? Colors.grey[850] : Colors.white,
                       padding: EdgeInsets.symmetric(
                         horizontal: 23,
                         vertical: 12,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
-                        side: BorderSide(color: Colors.white),
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 6),
-
+                  SizedBox(height: 5),
                   ElevatedButton.icon(
-                    onPressed: () {
-                      //add the apple here
-                    },
+                    onPressed: () {},
                     icon: Icon(Icons.apple, color: Colors.black),
                     label: Text(
                       AppLocalizations.of(context)!.continue_with_apple,
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor:
+                      isDark ? Colors.grey[850] : Colors.white,
                       padding: EdgeInsets.symmetric(
                         horizontal: 34,
                         vertical: 12,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
-                        side: BorderSide(color: Colors.white),
                       ),
                     ),
                   ),

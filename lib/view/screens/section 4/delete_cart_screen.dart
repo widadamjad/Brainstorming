@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:foodtek/core/theme_provider.dart';
+import 'package:foodtek/core/app_theme.dart';
 import 'package:foodtek/view/screens/section%204/cart_empty_screen.dart';
 import 'package:foodtek/view/screens/section%205/check_out_screen.dart';
 import 'package:foodtek/view/screens/section%203/filter_screen.dart';
@@ -38,40 +41,53 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final theme = themeProvider.isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme;
+    final textTheme = theme.textTheme;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         elevation: 0,
         title: Row(
           children: [
             IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ClientLocationScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ClientLocationScreen()),
+                );
               },
               icon: Icon(Icons.location_on, color: Colors.green, size: 31),
             ),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context)!.current_location, style: TextStyle(fontSize: 15)),
+                Text(
+                  AppLocalizations.of(context)!.current_location,
+                  style: textTheme.bodyMedium?.copyWith(fontSize: 15),
+                ),
                 Text(
                   "Jl. Soekarno Hatta 15A..",
-                  style: TextStyle(
+                  style: textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
-                    color: Colors.black,
                   ),
                 ),
               ],
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down)),
-            Spacer(),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_drop_down, color: theme.iconTheme.color),
+            ),
+            const Spacer(),
             IconButton(
               icon: Icon(
                 Icons.notifications_none,
-                color: Colors.black,
+                color: theme.appBarTheme.foregroundColor,
                 size: 31,
               ),
               onPressed: () {
@@ -87,7 +103,7 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 28, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -97,15 +113,11 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
                     child: Column(
                       children: [
                         Text(
-                        AppLocalizations.of(context)!.cart,
-                          style: TextStyle(
+                          AppLocalizations.of(context)!.cart,
+                          style: textTheme.bodyLarge?.copyWith(
                             fontSize: 18,
-                            fontWeight:
-                                selectedTab == 0
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                            color:
-                                selectedTab == 0 ? Colors.green : Colors.black,
+                            fontWeight: selectedTab == 0 ? FontWeight.bold : FontWeight.normal,
+                            color: selectedTab == 0 ? Colors.green : textTheme.bodyMedium?.color,
                           ),
                         ),
                         if (selectedTab == 0)
@@ -120,22 +132,21 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
                 ),
                 Expanded(
                   child: TextButton(
-                    onPressed: () => {
-
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoryScreen())),
-                      onTabChanged(1)},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HistoryScreen()),
+                      );
+                      onTabChanged(1);
+                    },
                     child: Column(
                       children: [
                         Text(
-                        AppLocalizations.of(context)!.history,
-                          style: TextStyle(
+                          AppLocalizations.of(context)!.history,
+                          style: textTheme.bodyLarge?.copyWith(
                             fontSize: 18,
-                            fontWeight:
-                                selectedTab == 1
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                            color:
-                                selectedTab == 1 ? Colors.green : Colors.black,
+                            fontWeight: selectedTab == 1 ? FontWeight.bold : FontWeight.normal,
+                            color: selectedTab == 1 ? Colors.green : textTheme.bodyMedium?.color,
                           ),
                         ),
                         if (selectedTab == 1)
@@ -153,7 +164,7 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListView(
                 children: [
                   CartItemWidget(
@@ -165,14 +176,14 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
                   ),
                   CartItemWidget(
                     title: AppLocalizations.of(context)!.chicken_burger,
-                     subtitle:AppLocalizations.of(context)!.burger_factory_ltd,
+                    subtitle: AppLocalizations.of(context)!.burger_factory_ltd,
                     price: 20,
                     image: "assets/images/chicken.burger.png",
                     onDelete: () {},
                   ),
                   CartItemWidget(
                     title: AppLocalizations.of(context)!.onion_pizza,
-                    subtitle:AppLocalizations.of(context)!.pizza_palace,
+                    subtitle: AppLocalizations.of(context)!.pizza_palace,
                     price: 15,
                     image: "assets/images/onion.pizza.png",
                     onDelete: () {},
@@ -183,31 +194,32 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
                     price: 15,
                     image: "assets/images/shawarma.png",
                     onDelete: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CartEmptyScreen()));
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CartEmptyScreen()),
+                      );
                     },
                   ),
                 ],
               ),
             ),
           ),
-          Column(
-            children: [
-              CartTotalWidget(
-                subtotal: 100,
-                delivery: 10,
-                discount: 10,
-                onOrderPressed: () {
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => CheckOutScreen()));
-                },
-              ),
-            ],
+          CartTotalWidget(
+            subtotal: 100,
+            delivery: 10,
+            discount: 10,
+            onOrderPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CheckOutScreen()),
+              );
+            },
           ),
         ],
       ),
-
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: theme.bottomNavigationBarTheme.backgroundColor,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(
@@ -218,14 +230,18 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
               BottomNavItemWidget(
                 icon: Icons.home,
                 label: AppLocalizations.of(context)!.home,
-
                 isSelected: selectedIndex == 3,
-                onTap: () => onItemTapped(3),
+                onTap: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  ),
+
+                  onItemTapped(3)},
               ),
               BottomNavItemWidget(
                 icon: Icons.favorite,
                 label: AppLocalizations.of(context)!.favorite,
-
                 isSelected: selectedIndex == 1,
                 onTap: () {
                   Navigator.push(
@@ -235,11 +251,10 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
                   onItemTapped(1);
                 },
               ),
-              const SizedBox(width: 40), // space for FAB
+              const SizedBox(width: 40),
               BottomNavItemWidget(
                 icon: Icons.history,
                 label: AppLocalizations.of(context)!.history,
-
                 isSelected: selectedIndex == 0,
                 onTap: () {
                   Navigator.push(
@@ -252,7 +267,6 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
               BottomNavItemWidget(
                 icon: Icons.person,
                 label: AppLocalizations.of(context)!.profile,
-
                 isSelected: selectedIndex == 4,
                 onTap: () {
                   Navigator.push(
@@ -269,8 +283,10 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>DeleteCartScreen()));
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DeleteCartScreen()),
+          );
           onItemTapped(2);
         },
         child: const Icon(Icons.shopping_cart, color: Colors.white, size: 30),

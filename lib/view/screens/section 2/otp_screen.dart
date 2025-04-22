@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'forgot_password_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
-
-
 class OTPScreen extends StatefulWidget {
   @override
   _OTPScreenState createState() => _OTPScreenState();
@@ -35,6 +32,8 @@ class _OTPScreenState extends State<OTPScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -58,7 +57,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 padding: EdgeInsets.all(25),
                 width: MediaQuery.of(context).size.width * 0.85,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: isDark ? Colors.grey[900] : Colors.white,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
@@ -71,8 +70,9 @@ class _OTPScreenState extends State<OTPScreen> {
                     ),
                     SizedBox(height: 15),
                     Text(
-                      AppLocalizations.of(context)!.a_4_digit_code_has_been_sent_to_your_email_please_enter_it_to_verify,                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black54),
+                      AppLocalizations.of(context)!.a_4_digit_code_has_been_sent_to_your_email_please_enter_it_to_verify,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: isDark ? Colors.white70 : Colors.black54),
                     ),
                     SizedBox(height: 30),
                     Row(
@@ -94,9 +94,10 @@ class _OTPScreenState extends State<OTPScreen> {
                             MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
                           );
                         },
-                        child: Text(AppLocalizations.of(context)!.verify,
-
-                            style: TextStyle(color: Colors.white)),
+                        child: Text(
+                          AppLocalizations.of(context)!.verify,
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ],

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:foodtek/view/screens/section%204/history_empty_screen.dart';
 import 'package:foodtek/view/screens/section%204/delete_cart_screen.dart';
-import 'package:foodtek/view/screens/section%204/history_screen.dart';
-import 'package:foodtek/view/screens/section%206/profile_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:foodtek/view/screens/section%206/profile_screen.dart';
+import 'package:foodtek/view/screens/section%203/favorites_screen.dart';
+import 'package:foodtek/view/screens/section%203/notification_screen.dart';
+import 'package:foodtek/view/screens/section%205/client_location_screen.dart';
 
 import '../../widgets/bottom_nav_Item_widget.dart';
-import '../section 5/client_location_screen.dart';
-import '../section 3/favorites_screen.dart';
-import 'history_empty_screen.dart';
-import '../section 3/home_screen.dart';
-import '../section 3/notification_screen.dart';
+import 'history_screen.dart';
 
 class CartEmptyScreen extends StatefulWidget {
   const CartEmptyScreen({super.key});
@@ -39,16 +38,16 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
         title: Row(
           children: [
             IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ClientLocationScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ClientLocationScreen()));
               },
               icon: Icon(Icons.location_on, color: Colors.green, size: 31),
             ),
@@ -84,7 +83,7 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
       body: Column(
         children: [
           Padding(
-            padding:  EdgeInsets.symmetric(vertical: 8.0),
+            padding: EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -152,7 +151,8 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  AppLocalizations.of(context)!.you_don_t_have_order_any_foods_before,                  textAlign: TextAlign.center,
+                  AppLocalizations.of(context)!.you_don_t_have_order_any_foods_before,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 17,
                     color: Colors.grey,
@@ -164,7 +164,7 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(
@@ -175,14 +175,12 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
               BottomNavItemWidget(
                 icon: Icons.home,
                 label: AppLocalizations.of(context)!.home,
-
                 isSelected: selectedIndex == 3,
                 onTap: () => onItemTapped(3),
               ),
               BottomNavItemWidget(
                 icon: Icons.favorite,
                 label: AppLocalizations.of(context)!.favorite,
-
                 isSelected: selectedIndex == 1,
                 onTap: () {
                   Navigator.push(
@@ -196,7 +194,6 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
               BottomNavItemWidget(
                 icon: Icons.history,
                 label: AppLocalizations.of(context)!.history,
-
                 isSelected: selectedIndex == 0,
                 onTap: () {
                   Navigator.push(
@@ -209,7 +206,6 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
               BottomNavItemWidget(
                 icon: Icons.person,
                 label: AppLocalizations.of(context)!.profile,
-
                 isSelected: selectedIndex == 4,
                 onTap: () {
                   Navigator.push(
@@ -226,8 +222,7 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>DeleteCartScreen()));
-
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DeleteCartScreen()));
           onItemTapped(2);
         },
         child: Icon(Icons.shopping_cart, color: Colors.white, size: 30),

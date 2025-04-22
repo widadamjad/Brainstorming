@@ -50,17 +50,20 @@ class _AddCardScreenState extends State<AddCardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+    final isDarkMode = brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title:  Text(AppLocalizations.of(context)!.add_card, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        title:  Text(AppLocalizations.of(context)!.add_card, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
         actions: [
           IconButton(
             icon: Icon(
               Icons.notifications_none,
-              color: Colors.black,
+              color: isDarkMode ? Colors.white : Colors.black,
               size: 31,
             ),
             onPressed: () {
@@ -85,7 +88,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
               expiryDate: _expiryController.text,
             ),
             const SizedBox(height: 10),
-             Text(AppLocalizations.of(context)!.name, style: TextStyle(fontSize: 14, color: Colors.grey)),
+            Text(AppLocalizations.of(context)!.name, style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white : Colors.grey)),
             TextField(
               controller: _nameController,
               onChanged: (value) => setState(() {}),
@@ -96,7 +99,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
               ),
             ),
             const SizedBox(height: 10),
-             Text(AppLocalizations.of(context)!.card_number, style: TextStyle(fontSize: 14, color: Colors.grey)),
+            Text(AppLocalizations.of(context)!.card_number, style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white : Colors.grey)),
             TextField(
               controller: _cardNumberController,
               onChanged: (value) => setState(() {}),
@@ -115,7 +118,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Text(AppLocalizations.of(context)!.expiry, style: TextStyle(fontSize: 14, color: Colors.grey)),
+                      Text(AppLocalizations.of(context)!.expiry, style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white : Colors.grey)),
                       TextField(
                         controller: _expiryController,
                         onChanged: (value) => setState(() {}),
@@ -134,7 +137,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Text(AppLocalizations.of(context)!.cvc, style: TextStyle(fontSize: 14, color: Colors.grey)),
+                      Text(AppLocalizations.of(context)!.cvc, style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white : Colors.grey)),
                       TextField(
                         decoration: InputDecoration(
                           hintText: "123",
@@ -149,8 +152,9 @@ class _AddCardScreenState extends State<AddCardScreen> {
               ],
             ),
             const SizedBox(height: 30),
-             Text(
-                 AppLocalizations.of(context)!.we_will_send_you_an_order_details_to_your_email_after_the_successfull_payment,              style: TextStyle(color: Colors.black54, fontSize: 12),
+            Text(
+              AppLocalizations.of(context)!.we_will_send_you_an_order_details_to_your_email_after_the_successfull_payment,
+              style: TextStyle(color: isDarkMode ? Colors.white : Colors.black54, fontSize: 12),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
@@ -163,8 +167,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
                 onPressed: () {
-             Navigator.push(context, MaterialPageRoute(builder: (context)=>CheckOutDoneScreen()));
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CheckOutDoneScreen()));
                 },
                 icon: const Icon(Icons.lock, color: Colors.white),
                 label:  Text(AppLocalizations.of(context)!.pay_for_the_order, style: TextStyle(color: Colors.white, fontSize: 16)),
@@ -174,7 +177,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: isDarkMode ? Colors.black : Colors.white,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(
@@ -183,18 +186,14 @@ class _AddCardScreenState extends State<AddCardScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BottomNavItemWidget(
-
                 icon: Icons.home,
                 label: AppLocalizations.of(context)!.home,
-
                 isSelected: selectedIndex == 0,
                 onTap: () => onItemTapped(0),
               ),
               BottomNavItemWidget(
-
                 icon: Icons.favorite,
                 label: AppLocalizations.of(context)!.favorite,
-
                 isSelected: selectedIndex == 1,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesScreen()));
@@ -203,10 +202,8 @@ class _AddCardScreenState extends State<AddCardScreen> {
               ),
               const SizedBox(width: 40), // space for FAB
               BottomNavItemWidget(
-
                 icon: Icons.home_work,
                 label: AppLocalizations.of(context)!.track,
-
                 isSelected: selectedIndex == 3,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => TrackLocationScreen()));
@@ -214,10 +211,8 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 },
               ),
               BottomNavItemWidget(
-
                 icon: Icons.person,
                 label: AppLocalizations.of(context)!.profile,
-
                 isSelected: selectedIndex == 4,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
@@ -232,7 +227,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
         backgroundColor: Colors.green,
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context)=>DeleteCartScreen()));
-
           onItemTapped(2);
         },
         child: const Icon(Icons.shopping_cart, color: Colors.white, size: 30),

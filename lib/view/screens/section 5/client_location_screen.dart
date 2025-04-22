@@ -9,7 +9,6 @@ import '../section 4/delete_cart_screen.dart';
 import '../section 4/history_screen.dart';
 import '../section 6/profile_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../section 6/track_location_screen.dart';
 
 class ClientLocationScreen extends StatefulWidget {
@@ -62,7 +61,10 @@ class _ClientLocationScreenState extends State<ClientLocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Stack(
         children: [
           GoogleMap(
@@ -91,7 +93,7 @@ class _ClientLocationScreenState extends State<ClientLocationScreen> {
               children: [
                 IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.arrow_back, color: Colors.black),
+                  icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
                 ),
                 Expanded(
                   child: TextFormField(
@@ -102,8 +104,9 @@ class _ClientLocationScreenState extends State<ClientLocationScreen> {
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
                       ),
-                      fillColor: Colors.white,
+                      fillColor: isDarkMode ? Colors.grey[800] : Colors.white,
                       filled: true,
+                      hintStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
                     ),
                   ),
                 ),
@@ -117,7 +120,7 @@ class _ClientLocationScreenState extends State<ClientLocationScreen> {
             child: Container(
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isDarkMode ? Colors.grey[800] : Colors.white,
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: const [
                   BoxShadow(
@@ -130,20 +133,20 @@ class _ClientLocationScreenState extends State<ClientLocationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Row(
+                  Row(
                     children: [
                       Icon(Icons.location_on, color: Colors.green),
                       SizedBox(width: 8),
                       Text(
-                          AppLocalizations.of(context)!.your_location,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        AppLocalizations.of(context)!.your_location,
+                        style: TextStyle(fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
                       ),
                     ],
                   ),
                   const SizedBox(height: 5),
                   Text(
                     addressText,
-                    style: const TextStyle(color: Colors.black54),
+                    style: TextStyle(color: isDarkMode ? Colors.white70 : Colors.black54),
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
@@ -153,9 +156,9 @@ class _ClientLocationScreenState extends State<ClientLocationScreen> {
                         MaterialPageRoute(
                           builder:
                               (context) => HomeScreen(
-                                userLocation: selectedLocation,
-                                addressText: addressText,
-                              ),
+                            userLocation: selectedLocation,
+                            addressText: addressText,
+                          ),
                         ),
                       );
                     },
@@ -167,7 +170,7 @@ class _ClientLocationScreenState extends State<ClientLocationScreen> {
                       minimumSize: const Size(double.infinity, 45),
                     ),
                     child:  Text(
-                        AppLocalizations.of(context)!.set_location,
+                      AppLocalizations.of(context)!.set_location,
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
@@ -178,7 +181,7 @@ class _ClientLocationScreenState extends State<ClientLocationScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: isDarkMode ? Colors.grey[800] : Colors.white,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(

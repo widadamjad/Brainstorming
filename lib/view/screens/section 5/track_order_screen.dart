@@ -29,13 +29,18 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title:  Text(AppLocalizations.of(context)!.order_detail,),
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        title: Text(
+          AppLocalizations.of(context)!.order_detail,
+          style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -54,8 +59,8 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                 const SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:  [
-                    Text(AppLocalizations.of(context)!.order_id, style: TextStyle(fontWeight: FontWeight.bold)),
+                  children: [
+                    Text(AppLocalizations.of(context)!.order_id, style: TextStyle(fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
                     Text("#6579-6432", style: TextStyle(color: Colors.grey)),
                     Text(AppLocalizations.of(context)!.min_25),
                   ],
@@ -77,7 +82,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
               leading: const CircleAvatar(
                 backgroundImage: AssetImage("assets/images/delivery_person.jpg"),
               ),
-              title:  Text(AppLocalizations.of(context)!.aleksandr_v),
+              title: Text(AppLocalizations.of(context)!.aleksandr_v, style: TextStyle(color: isDarkMode ? Colors.white : Colors.black)),
               subtitle: Row(
                 children: const [
                   Icon(Icons.star, color: Colors.orange, size: 16),
@@ -126,14 +131,14 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                child:  Text(AppLocalizations.of(context)!.live_track, style: TextStyle(color: Colors.white, fontSize: 16)),
+                child: Text(AppLocalizations.of(context)!.live_track, style: TextStyle(color: Colors.white, fontSize: 16)),
               ),
             ),
           ],
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: isDarkMode ? Colors.black : Colors.white,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(

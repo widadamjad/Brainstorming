@@ -10,8 +10,8 @@ import 'package:foodtek/view/screens/section%203/favorites_screen.dart';
 import 'package:foodtek/view/screens/section%204/history_screen.dart';
 import '../../../controller/track_location_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../widgets/bottom_nav_Item_widget.dart';
+
 class TrackLocationScreen extends StatefulWidget {
   const TrackLocationScreen({super.key});
 
@@ -73,7 +73,9 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey[800]
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4)],
               ),
@@ -85,9 +87,7 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
                 ],
               ),
             ),
-
           ),
-
           Positioned(
             top: 40,
             left: 15,
@@ -114,7 +114,9 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
                       ),
-                      fillColor: Colors.white,
+                      fillColor: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey[700]
+                          : Colors.white,
                       filled: true,
                     ),
                   ),
@@ -127,9 +129,11 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               height: MediaQuery.of(context).size.height * 0.34,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey[800]
+                    : Colors.white,
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(25),
                   topRight: Radius.circular(25),
                 ),
@@ -149,20 +153,24 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
                     children: [
                       Text(
                         currentStep == 0
-                            ?AppLocalizations.of(context)!.order_placed
+                            ? AppLocalizations.of(context)!.order_placed
                             : currentStep == 1
                             ? AppLocalizations.of(context)!.on_the_way
                             : AppLocalizations.of(context)!.delivered,
-                        style:  TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black,
                         ),
                       ),
                       TextButton(
                         onPressed: () {},
-                        child:  Text(
-                            AppLocalizations.of(context)!.all_detail,
-                          style: TextStyle(fontSize: 16, color: Colors.green),
+                        child: Text(
+                          AppLocalizations.of(context)!.all_detail,
+                          style: TextStyle(
+                              fontSize: 16, color: Colors.green),
                         ),
                       ),
                     ],
@@ -176,11 +184,11 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
                         "assets/images/delivery_person.jpg",
                       ),
                     ),
-                    title:  Text(
-    AppLocalizations.of(context)!.your_delivery_hero,
+                    title: Text(
+                      AppLocalizations.of(context)!.your_delivery_hero,
                       style: TextStyle(color: Colors.grey),
                     ),
-                    subtitle:  Row(
+                    subtitle: Row(
                       children: [
                         Text(AppLocalizations.of(context)!.aleksandr_v),
                         SizedBox(width: 5),
@@ -203,7 +211,7 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
                         CircleAvatar(
                           backgroundColor: Colors.grey.shade200,
                           child: IconButton(
-                            icon:  Icon(Icons.chat, color: Colors.orange),
+                            icon: Icon(Icons.chat, color: Colors.orange),
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -218,14 +226,14 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                   Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           SizedBox(width: 8),
                           Text(
-                              AppLocalizations.of(context)!.your_location,
+                            AppLocalizations.of(context)!.your_location,
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -250,7 +258,9 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.grey[850]
+            : Colors.white,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(
@@ -261,8 +271,8 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
               BottomNavItemWidget(
                 icon: Icons.home,
                 label: AppLocalizations.of(context)!.home,
-                isSelected: selectedIndex2 == 0,
-                onTap: () => onItemTapped2(0),
+                isSelected: selectedIndex2 == 3,
+                onTap: () => onItemTapped2(3),
               ),
               BottomNavItemWidget(
                 icon: Icons.favorite,
@@ -277,10 +287,10 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
               BottomNavItemWidget(
                 icon: Icons.home_work,
                 label: AppLocalizations.of(context)!.track,
-                isSelected: selectedIndex2 == 3,
+                isSelected: selectedIndex2 == 0,
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const TrackLocationScreen()));
-                  onItemTapped2(3);
+                  onItemTapped2(0);
                 },
               ),
               BottomNavItemWidget(
@@ -308,31 +318,7 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
         child: const Icon(Icons.shopping_cart, color: Colors.white, size: 30),
       ),
       floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
+      FloatingActionButtonLocation.miniCenterDocked,
     );
   }
-}
-
-Future<Position> _determinePosition() async {
-  bool serviceEnabled;
-  LocationPermission permission;
-
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    return Future.error('Location services are disabled.');
-  }
-
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      return Future.error('Location permissions are denied');
-    }
-  }
-
-  if (permission == LocationPermission.deniedForever) {
-    return Future.error('Location permissions are permanently denied.');
-  }
-
-  return await Geolocator.getCurrentPosition();
 }

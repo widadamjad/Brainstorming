@@ -19,8 +19,10 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Column(
         children: [
           Expanded(
@@ -35,7 +37,11 @@ class _IntroScreenState extends State<IntroScreen> {
                     AppLocalizations.of(
                       context,
                     )!.welcome_to_salah,
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
                   ),
                   SizedBox(height: 10),
                   Text(
@@ -43,9 +49,11 @@ class _IntroScreenState extends State<IntroScreen> {
                       context,
                     )!.enjoy_af_a_stand_smooth_food_delivery_at_your_door_step,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
+                    ),
                   ),
-
                   SizedBox(height: 70),
                   TextButton(
                     onPressed: () {
@@ -66,7 +74,6 @@ class _IntroScreenState extends State<IntroScreen> {
                     ),
                     child: Text(
                       AppLocalizations.of(context)!.btn_cont,
-
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
@@ -74,7 +81,6 @@ class _IntroScreenState extends State<IntroScreen> {
               ),
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Row(
@@ -91,10 +97,12 @@ class _IntroScreenState extends State<IntroScreen> {
                   },
                   child: Text(
                     "Skip",
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: isDarkMode ? Colors.white : Colors.grey,
+                    ),
                   ),
                 ),
-
                 SmoothPageIndicator(
                   controller: _controller,
                   count: 1,
@@ -117,19 +125,6 @@ class _IntroScreenState extends State<IntroScreen> {
                     );
                   },
                 ),
-
-                // TextButton(
-                //     onPressed: () {
-                //       Provider.of<LangController>(context, listen: false)
-                //           .changeLang(langCode: "ar");
-                //     },
-                //     child: Text("Arabic")),
-                // TextButton(
-                //     onPressed: () {
-                //       Provider.of<LangController>(context, listen: false)
-                //           .changeLang(langCode: "en");
-                //     },
-                //     child: Text("English")),
               ],
             ),
           ),

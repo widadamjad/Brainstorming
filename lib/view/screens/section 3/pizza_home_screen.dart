@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodtek/view/screens/section%203/filter_screen.dart';
 import 'package:foodtek/view/screens/section%203/order_details_screen.dart';
 import 'package:foodtek/view/screens/section%206/profile_screen.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../widgets/bottom_nav_Item_widget.dart';
 import '../../widgets/category_button_widget.dart';
 import '../../widgets/foods/food_cart2_widget.dart';
 import '../section 5/client_location_screen.dart';
@@ -34,19 +35,23 @@ class _PizzaScreenState extends State<PizzaScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: theme.scaffoldBackgroundColor,
         elevation: 0,
         title: Row(
           children: [
             IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ClientLocationScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ClientLocationScreen()));
               },
               icon: Icon(Icons.location_on, color: Colors.green, size: 31),
             ),
@@ -54,25 +59,29 @@ class _PizzaScreenState extends State<PizzaScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Current location", style: TextStyle(fontSize: 15)),
+                Text(
+              AppLocalizations.of(
+              context,
+            )!.current_location,
+                  style: TextStyle(fontSize: 15, color: theme.textTheme.bodyMedium!.color),
+                ),
                 Text(
                   "Jl. Soekarno Hatta 15A..",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
-                    color: Colors.black,
+                    color: theme.textTheme.bodyLarge!.color,
                   ),
                 ),
               ],
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down)),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_drop_down, color: theme.iconTheme.color),
+            ),
             Spacer(),
             IconButton(
-              icon: Icon(
-                Icons.notifications_none,
-                color: Colors.black,
-                size: 31,
-              ),
+              icon: Icon(Icons.notifications_none, color: theme.iconTheme.color, size: 31),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -84,27 +93,28 @@ class _PizzaScreenState extends State<PizzaScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding:  EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
               decoration: InputDecoration(
-                hintText: "Search pizza, restaurant or etc",
-                prefixIcon: Icon(Icons.search),
+                hintText: AppLocalizations.of(
+                  context,
+                )!.search_menu_restaurant_or_etc,
+                hintStyle: TextStyle(color: isDark ? Colors.white60 : Colors.black45),
+                prefixIcon: Icon(Icons.search, color: theme.iconTheme.color),
                 suffixIcon: IconButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>FilterScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => FilterScreen()));
                   },
-                  icon: IconButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>FilterScreen()));
-                  }, icon: Icon(Icons.tune)),
+                  icon: Icon(Icons.tune, color: theme.iconTheme.color),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
                 ),
-                fillColor: Colors.grey[200],
+                fillColor: isDark ? Colors.grey[800] : Colors.grey[200],
                 filled: true,
               ),
             ),
@@ -114,36 +124,30 @@ class _PizzaScreenState extends State<PizzaScreen> {
               child: Row(
                 children: [
                   CategoryButtonWidget(
-                    title: "All",
+                    title:  AppLocalizations.of(
+                      context,
+                    )!.all,
                     isSelected: false,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                     },
                   ),
                   CategoryButtonWidget(
-                    title: "🍔  Burger",
-                  //  icon: Icons.lunch_dining_sharp,
+                    title: '🍔 ${AppLocalizations.of(context)!.burger}',
                     isSelected: false,
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderDetailsScreen()));
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetailsScreen()));
                     },
                   ),
                   CategoryButtonWidget(
-                    title: "🍕   Pizza",
-                  //  icon: Icons.local_pizza,
+                    title: '🍕  ${AppLocalizations.of(context)!.pizza}',
                     isSelected: true,
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>PizzaScreen()));
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PizzaScreen()));
                     },
                   ),
                   CategoryButtonWidget(
-                    title: " 🌭  Sandwich",
-                    //icon: Icons.fastfood,
+                    title: '🌭 ${AppLocalizations.of(context)!.sandwich}',
                     isSelected: false,
                     onPressed: () {},
                   ),
@@ -151,7 +155,6 @@ class _PizzaScreenState extends State<PizzaScreen> {
               ),
             ),
             SizedBox(height: 10),
-
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -160,32 +163,41 @@ class _PizzaScreenState extends State<PizzaScreen> {
                 childAspectRatio: screenWidth / (screenWidth * 1.3),
                 children: [
                   FoodCard2Widget(
-                    title: "Pepperoni Pizza",
+                    title: AppLocalizations.of(context)!.pepperoni_pizza,
                     description:
-                        "Pepperoni pizza, Margarita Pizza, Italian cuisine",
+                    AppLocalizations.of(
+                      context,
+                    )!.pepperoni_pizza_margarita_pizza_margherita_italian_cuisine_tomato,
                     price: "29.00",
                     imagePath: "assets/images/pizza (1).png",
                     rating: 4.5,
                   ),
                   FoodCard2Widget(
-                    title: "Pizza Cheese",
-                    description: "Food pizza dish cuisine junk food, Fast Food",
+                    title: AppLocalizations.of(context)!.pizza_cheese,
+                    description:
+                    AppLocalizations.of(
+                      context,
+                    )!.food_pizza_dish_cuisine_junk_food_fast_food_flatbread_ingredient,
                     price: "23.00",
                     imagePath: "assets/images/pizza1.png",
                     rating: 4.3,
                   ),
                   FoodCard2Widget(
-                    title: "Peppy Paneer",
+                    title: AppLocalizations.of(context)!.peppy_paneer,
                     description:
-                        "Chunky paneer with crisp capsicum & red pepper",
+                    AppLocalizations.of(
+                      context,
+                    )!.chunky_paneer_with_crisp_capsicum_and_spicy_red_pepper,
                     price: "13.00",
                     imagePath: "assets/images/pizza2.png",
                     rating: 4.2,
                   ),
                   FoodCard2Widget(
-                    title: "Mexican Green ",
+                    title: AppLocalizations.of(context)!.mexican_green_wave,
                     description:
-                        "Crunchy onions, crisp capsicum, juicy tomatoes",
+                    AppLocalizations.of(
+                      context,
+                    )!.a_pizza_loaded,
                     price: "23.00",
                     imagePath: "assets/images/pizza3.png",
                     rating: 4.7,
@@ -197,78 +209,74 @@ class _PizzaScreenState extends State<PizzaScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        shape: CircularNotchedRectangle(),
+        color: isDarkMode ? Colors.black : Colors.white,
+        shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: Icon(
-                Icons.home,
-                color: selectedIndex == 0 ? Colors.green : Colors.grey,
+        child: SizedBox(
+          height: 80,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              BottomNavItemWidget(
+                icon: Icons.home,
+                label: AppLocalizations.of(context)!.home,
+                isSelected: selectedIndex == 1,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                  onItemTapped(1);
+                },
               ),
-              onPressed: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen())),
-
-                onItemTapped(0)},
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.favorite,
-                color: isFavoriteSelected ? Colors.green : Colors.grey,
+              BottomNavItemWidget(
+                icon: Icons.favorite,
+                label: AppLocalizations.of(context)!.favorite,
+                isSelected: selectedIndex == 0,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FavoritesScreen()),
+                  );
+                  onItemTapped(0);
+                },
               ),
-              onPressed: () {
-                setState(() {
-                  isFavoriteSelected = true;
-                });
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FavoritesScreen()),
-                ).then((_) {
-                  setState(() {
-                    isFavoriteSelected = false;
-                  });
-                });
-              },
-            ),
-            SizedBox(width: 40),
-            IconButton(
-              icon: Icon(
-                Icons.history,
-                color: selectedIndex == 3 ? Colors.green : Colors.grey,
+              const SizedBox(width: 40), // space for FAB
+              BottomNavItemWidget(
+                icon: Icons.history,
+                label: AppLocalizations.of(context)!.history,
+                isSelected: selectedIndex == 3,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HistoryScreen()),
+                  );
+                  onItemTapped(3);
+                },
               ),
-              onPressed: () => {
-
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoryScreen())),
-
-                onItemTapped(3)},
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.person,
-                color: selectedIndex == 4 ? Colors.green : Colors.grey,
+              BottomNavItemWidget(
+                icon: Icons.person,
+                label: AppLocalizations.of(context)!.profile,
+                isSelected: selectedIndex == 4,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileScreen()),
+                  );
+                  onItemTapped(4);
+                },
               ),
-              onPressed:
-                  () => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProfileScreen(),
-                  ),
-                ),
-
-                onItemTapped(4),
-              },            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>DeleteCartScreen()));
-
-          onItemTapped(2);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DeleteCartScreen()),
+          );
         },
         child: Icon(Icons.shopping_cart, color: Colors.white, size: 30),
       ),

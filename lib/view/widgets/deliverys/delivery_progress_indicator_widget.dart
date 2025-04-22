@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 class DeliveryProgressIndicatorWidget extends StatelessWidget {
   final int currentStep;
@@ -10,72 +13,63 @@ class DeliveryProgressIndicatorWidget extends StatelessWidget {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildStep("Order Placed", 0),
-            buildStep("On The Way", 1),
-            buildStep("Delivered", 2),
+            _buildStep( AppLocalizations.of(
+              context,
+            )!.order_placed, 0),
+            _buildStep( AppLocalizations.of(
+              context,
+            )!.on_the_way, 1),
+            _buildStep( AppLocalizations.of(
+              context,
+            )!.delivered, 2),
           ],
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 8),
         Row(
           children: [
-            Expanded(
-              child: Container(
-                height: 5,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                decoration: BoxDecoration(
-                  color: currentStep >= 0 ? Colors.green : Colors.transparent,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                height: 5,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                decoration: BoxDecoration(
-
-                  color:
-                      currentStep >= 1
-                          ? Colors.green.withOpacity(0.5)
-                          : Colors.transparent,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                height: 5,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                decoration: BoxDecoration(
-                  color:
-                      currentStep >= 2
-                          ? Colors.green.withOpacity(0.5)
-                          : Colors.grey[300],
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
+            _buildLine(0),
+            _buildLine(1),
+            _buildLine(2),
           ],
         ),
       ],
     );
   }
 
-  Widget buildStep(String text, int step) {
-    return Column(
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight:
-                currentStep == step ? FontWeight.bold : FontWeight.normal,
-            color: currentStep >= step ? Colors.green : Colors.grey,
-          ),
+  Widget _buildStep(String text, int step) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 16,
+        fontWeight: currentStep == step ? FontWeight.bold : FontWeight.normal,
+        color: currentStep >= step ? Colors.green : Colors.grey,
+      ),
+    );
+  }
+
+  Widget _buildLine(int step) {
+    Color color = Colors.transparent;
+    if (currentStep >= step) {
+      if (step == 0) {
+        color = Colors.green;
+      } else if (step == 1) {
+        color = Colors.green.withOpacity(0.5);
+      } else {
+        color = Colors.black;
+      }
+    }
+
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 2),
+        height: 3,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(2),
         ),
-      ],
+      ),
     );
   }
 }

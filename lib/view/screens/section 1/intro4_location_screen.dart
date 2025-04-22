@@ -69,8 +69,10 @@ class _Intro4LocationScreenState extends State<Intro4LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -82,15 +84,21 @@ class _Intro4LocationScreenState extends State<Intro4LocationScreen> {
               children: [
                 Text(
                   AppLocalizations.of(context)!.turn_on_your_location,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 12),
                 Text(
-                  AppLocalizations.of(
-                    context,
-                  )!.to_continues_let_your_device_turn_on_location_which_uses_googles_location_service,
-                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  AppLocalizations.of(context)!
+                      .to_continues_let_your_device_turn_on_location_which_uses_googles_location_service,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: isDarkMode ? Colors.grey[300] : Colors.grey[600],
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -121,32 +129,31 @@ class _Intro4LocationScreenState extends State<Intro4LocationScreen> {
                 ),
                 const SizedBox(height: 20),
                 OutlinedButton(
-                  onPressed:
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  ),
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
                     minimumSize: const Size(double.infinity, 50),
-                    side: BorderSide(color: Colors.grey[400]!),
+                    side: BorderSide(
+                      color: isDarkMode ? Colors.grey[600]! : Colors.grey[400]!,
+                    ),
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.btn_cancel,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-
-
         ],
       ),
     );

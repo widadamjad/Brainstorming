@@ -14,9 +14,9 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final TextEditingController newPassTextEditingController =
-      TextEditingController();
+  TextEditingController();
   final TextEditingController confirmPassTextEditingController =
-      TextEditingController();
+  TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +37,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           Center(
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 25, horizontal: 10),
-              width: MediaQuery.of(context).size.width * 0.70,
-              height: MediaQuery.of(context).size.height * 0.43,
+              width: MediaQuery.of(context).size.width * 0.80,
+              height: MediaQuery.of(context).size.height * 0.51,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey[900]
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -66,10 +68,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   Row(
                     children: [
                       Text(
-                      AppLocalizations.of(context)!.reset_password,
+                        AppLocalizations.of(context)!.reset_password,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black,
                         ),
                       ),
                     ],
@@ -78,8 +83,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   Row(
                     children: [
                       Text(
-                      AppLocalizations.of(context)!.want_to_try_with_my_current_password,
-                        style: TextStyle(fontSize: 10),
+                        AppLocalizations.of(context)!.want_to_try_with_my_current_password,
+                        style: TextStyle(fontSize: 10, color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black54),
                       ),
                       TextButton(
                         onPressed: () {
@@ -108,36 +113,24 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     decoration: InputDecoration(
                       filled: true,
                       label: Text(AppLocalizations.of(context)!.new_password),
-                      fillColor: Colors.white,
-                      //  labelText: "",
+                      fillColor: Theme.of(context).brightness == Brightness.dark ? Colors.grey[850] : Colors.white,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(11),
                       ),
-
-                      // errorText:
-                      // loginController.showErrorPassword
-                      //     ? "Enter Your Password"
-                      //     : null,
                     ),
                   ),
                   SizedBox(height: 10),
 
                   TextFormField(
                     controller: confirmPassTextEditingController,
-                    //put in login controller
                     obscureText: loginController.obscureTextPassword,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: Theme.of(context).brightness == Brightness.dark ? Colors.grey[850] : Colors.white,
                       labelText: AppLocalizations.of(context)!.confirm_new_password,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(11),
                       ),
-
-                      // errorText:
-                      // loginController.showErrorPassword
-                      //     ? "Enter Your Password"
-                      //     : null,
                     ),
                   ),
                   SizedBox(height: 20),
@@ -146,8 +139,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     onPressed: () {
                       loginController.checkPassword(
                         password:
-                            newPassTextEditingController
-                                .text, //put in login controller
+                        newPassTextEditingController.text,
                       );
                       Navigator.push(
                         context,
@@ -165,7 +157,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       ),
                     ),
                     child: Text(
-    AppLocalizations.of(context)!.update_password,
+                      AppLocalizations.of(context)!.update_password,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

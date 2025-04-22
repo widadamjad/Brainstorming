@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HistoryWidget extends StatelessWidget {
   final String title;
@@ -8,8 +9,6 @@ class HistoryWidget extends StatelessWidget {
   final String image;
   final DateTime date;
 
-  //final IconData? icon;
-
   const HistoryWidget({
     super.key,
     required this.title,
@@ -17,18 +16,19 @@ class HistoryWidget extends StatelessWidget {
     required this.price,
     required this.image,
     required this.date,
-    //   this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 6.0),
-      padding: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-      border: Border.all(color: Colors.white),
+        border: Border.all(color: theme.colorScheme.outline),
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        color: theme.cardColor,
       ),
       child: Row(
         children: [
@@ -41,29 +41,36 @@ class HistoryWidget extends StatelessWidget {
               fit: BoxFit.cover,
               errorBuilder:
                   (context, error, stackTrace) =>
-                      Icon(Icons.fastfood, size: 60),
+                      const Icon(Icons.fastfood, size: 60),
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  "\$$price",
-                  style: TextStyle(
-                    fontSize: 16,
+                  AppLocalizations.of(context)!.title,
+                  style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  AppLocalizations.of(context)!.sub_title,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.hintColor,
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "\$${price} ${AppLocalizations.of(context)!.price}",
+
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                     color: Colors.green,
                   ),
                 ),
@@ -75,26 +82,32 @@ class HistoryWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.access_time_outlined,
                     size: 17,
                     color: Colors.green,
                   ),
-                  SizedBox(width: 3),
+                  const SizedBox(width: 3),
                   Text(
                     DateFormat('MM.dd.yyyy').format(date),
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.hintColor,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  Icon(Icons.autorenew, size: 17, color: Colors.green),
-
+                  const Icon(Icons.autorenew, size: 17, color: Colors.green),
                   TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Reorder",
+                    onPressed: () {
+                      // Implement reorder action here
+                    },
+                    child:  Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.reorder,
                       style: TextStyle(color: Colors.green),
                     ),
                   ),

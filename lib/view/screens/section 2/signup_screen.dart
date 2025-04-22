@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodtek/view/screens/section%202/login_screen.dart';
 import 'package:intl/intl.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/signup_widgets.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -19,6 +19,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -39,20 +41,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: isDark ? Colors.grey[900] : Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Sign Up',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      Text(
+
+                    AppLocalizations.of(
+                    context,
+                  )!.sign_up,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Text("Already have an account?"),
+                          Text(
+
+                          AppLocalizations.of(
+                          context,
+                          )!.already_have_an_account,
+                            style: TextStyle(color: isDark ? Colors.white : Colors.black),
+                          ),
                           TextButton(
                             onPressed: () {
                               Navigator.push(
@@ -60,8 +75,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 MaterialPageRoute(builder: (context) => LoginScreen()),
                               );
                             },
-                            child: const Text(
-                              "Login",
+                            child:  Text(
+
+    AppLocalizations.of(
+    context,
+    )!.login,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.green,
@@ -71,16 +89,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      CustomTextField(controller: _nameController, labelText: 'Full Name'),
+                      CustomTextField(
+                        controller: _nameController,
+                        labelText:
+                        AppLocalizations.of(
+                          context,
+                        )!.full_name,
+                      ),
                       CustomTextField(
                         controller: _emailController,
-                        labelText: 'Email',
+                        labelText:
+                        AppLocalizations.of(
+                          context,
+                        )!.email,
                         keyboardType: TextInputType.emailAddress,
                         suffixIcon: const Icon(Icons.email),
                       ),
                       CustomTextField(
                         controller: _dateController,
-                        labelText: 'Date of Birth',
+                        labelText:
+                        AppLocalizations.of(
+                          context,
+                        )!.birth_of_date,
                         readOnly: true,
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.calendar_today),
@@ -93,19 +123,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             );
                             if (pickedDate != null) {
                               setState(() {
-                                _dateController.text = DateFormat('dd/MM/yyyy').format(pickedDate);
+                                _dateController.text =
+                                    DateFormat('dd/MM/yyyy').format(pickedDate);
                               });
                             }
                           },
                         ),
                       ),
+                      // بدون تعديل على خانة مفتاح الدولة
                       PhoneInputField(controller: _phoneController),
                       CustomTextField(
                         controller: _passwordController,
-                        labelText: 'Set Password',
+                        labelText:
+                        AppLocalizations.of(
+                          context,
+                        )!.set_password,
                         isPassword: !_isPasswordVisible,
                         suffixIcon: IconButton(
-                          icon: Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(
+                            _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                            color: isDark ? Colors.white : null,
+                          ),
                           onPressed: () {
                             setState(() {
                               _isPasswordVisible = !_isPasswordVisible;
@@ -125,8 +163,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             MaterialPageRoute(builder: (context) => LoginScreen()),
                           );
                         },
-                        child: const Text(
-                          'Register',
+                        child:  Text(
+
+                            AppLocalizations.of(
+                              context,
+                            )!.register,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

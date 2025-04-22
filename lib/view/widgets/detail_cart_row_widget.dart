@@ -4,16 +4,24 @@ class DetailCartRow extends StatelessWidget {
   final String label;
   final String value;
   final bool isTotal;
+  final Color? labelColor;
+  final Color? valueColor;
 
   const DetailCartRow({
     super.key,
     required this.label,
     required this.value,
     this.isTotal = false,
+    this.labelColor,
+    this.valueColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final defaultColor = Theme.of(context).brightness == Brightness.dark
+        ? Colors.white
+        : Colors.black;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -22,7 +30,7 @@ class DetailCartRow extends StatelessWidget {
           style: TextStyle(
             fontSize: isTotal ? 19 : 16,
             fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-            color: Colors.white,
+            color: labelColor ?? defaultColor,
           ),
         ),
         Text(
@@ -30,7 +38,7 @@ class DetailCartRow extends StatelessWidget {
           style: TextStyle(
             fontSize: isTotal ? 19 : 16,
             fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-            color: Colors.white,
+            color: valueColor ?? defaultColor,
           ),
         ),
       ],
