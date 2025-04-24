@@ -150,7 +150,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 isSelected: selectedIndex == 0,
                 onTap: () {
                   onItemTapped(0);
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  HomeScreen()));
                 },
               ),
               BottomNavItemWidget(

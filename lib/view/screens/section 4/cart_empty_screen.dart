@@ -8,6 +8,7 @@ import 'package:foodtek/view/screens/section%203/favorites_screen.dart';
 import 'package:foodtek/view/screens/section%203/notification_screen.dart';
 import 'package:foodtek/view/screens/section%205/client_location_screen.dart';
 
+import '../../../controller/location_controller.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
 import 'history_screen.dart';
 
@@ -37,6 +38,7 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -55,14 +57,23 @@ class _CartEmptyScreenState extends State<CartEmptyScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context)!.current_location, style: TextStyle(fontSize: 15)),
                 Text(
-                  "Jl. Soekarno Hatta 15A..",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
+                  AppLocalizations.of(context)!.current_location,
+                  style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black),
+                ),
+                Consumer<LocationController>(
+                  builder: (context, locationController, child) {
+                    return Text(
+                      locationController.address.isNotEmpty
+                          ? locationController.address
+                          : AppLocalizations.of(context)!.set_location,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

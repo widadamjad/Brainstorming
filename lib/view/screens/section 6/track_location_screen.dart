@@ -128,7 +128,7 @@ class _TrackLocationScreenState extends State<TrackLocationScreen> {
             alignment: Alignment.bottomCenter,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              height: MediaQuery.of(context).size.height * 0.34,
+              height: MediaQuery.of(context).size.height * 0.37,
               decoration: BoxDecoration(
                 color: Theme.of(context).brightness == Brightness.dark
                     ? Colors.grey[800]

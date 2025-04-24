@@ -13,10 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController emailTextEditingController =
-  TextEditingController();
-  final TextEditingController passTextEditingController =
-  TextEditingController();
+  final TextEditingController emailTextEditingController = TextEditingController();
+  final TextEditingController passTextEditingController = TextEditingController();
   bool RememberMe = false;
 
   @override
@@ -37,15 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Center(
             child: Container(
+              constraints: BoxConstraints(maxWidth: 500),
+              margin: EdgeInsets.symmetric(horizontal: 20),
               padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-              width: MediaQuery.of(context).size.width * 0.85,
-              height: MediaQuery.of(context).size.height * 0.69,
               decoration: BoxDecoration(
                 color: isDark ? Colors.grey[900] : Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
@@ -72,12 +69,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         children: [
                           TextSpan(
-                            text: AppLocalizations.of(context)!
-                                .dont_have_an_account,
+                            text: AppLocalizations.of(context)!.dont_have_an_account,
                           ),
-                          TextSpan(
-                            text: " ",
-                          ),
+                          TextSpan(text: " "),
                           TextSpan(
                             text: AppLocalizations.of(context)!.sign_up,
                             style: TextStyle(
@@ -98,9 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         label: AppLocalizations.of(context)!.email,
                         hintText: "Loisbakit@gmail.com",
                         errorText: loginController.showErrorEmail
-                            ?  AppLocalizations.of(
-                          context,
-                        )!.enter_a_valid_email
+                            ? AppLocalizations.of(context)!.enter_a_valid_email
                             : null,
                       );
                     },
@@ -124,9 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           loginController.changeObscureTextPassword();
                         },
                         icon: Icon(
-                          loginController.obscureTextPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                          loginController.obscureTextPassword ? Icons.visibility : Icons.visibility_off,
                           color: isDark ? Colors.white : null,
                         ),
                       ),
@@ -162,9 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => ResetPasswordScreen(),
-                            ),
+                            MaterialPageRoute(builder: (context) => ResetPasswordScreen()),
                           );
                         },
                         child: Text(
@@ -177,23 +165,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 5),
                   TextButton(
                     onPressed: () {
-                      loginController.checkEmail(
-                        email: emailTextEditingController.text,
-                      );
-                      loginController.checkPassword(
-                        password: passTextEditingController.text,
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
+                      loginController.checkEmail(email: emailTextEditingController.text);
+                      loginController.checkPassword(password: passTextEditingController.text);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                     },
-                    style: ElevatedButton.styleFrom(
+                    style: TextButton.styleFrom(
                       backgroundColor: Colors.green,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 130,
-                        vertical: 14,
-                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 100, vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -221,17 +199,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     icon: Icon(Icons.g_mobiledata_outlined, color: Colors.red),
                     label: Text(
                       AppLocalizations.of(context)!.continue_with_google,
-                      style: TextStyle(
-                        color: isDark ? Colors.white : Colors.black,
-                      ),
+                      style: TextStyle(color: isDark ? Colors.white : Colors.black),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                      isDark ? Colors.grey[850] : Colors.white,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30,
-                        vertical: 12,
-                      ),
+                      backgroundColor: isDark ? Colors.grey[850] : Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -243,17 +215,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     icon: Icon(Icons.facebook, color: Colors.blue),
                     label: Text(
                       AppLocalizations.of(context)!.continue_with_facebook,
-                      style: TextStyle(
-                        color: isDark ? Colors.white : Colors.black,
-                      ),
+                      style: TextStyle(color: isDark ? Colors.white : Colors.black),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                      isDark ? Colors.grey[850] : Colors.white,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 23,
-                        vertical: 12,
-                      ),
+                      backgroundColor: isDark ? Colors.grey[850] : Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 23, vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -265,17 +231,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     icon: Icon(Icons.apple, color: Colors.black),
                     label: Text(
                       AppLocalizations.of(context)!.continue_with_apple,
-                      style: TextStyle(
-                        color: isDark ? Colors.white : Colors.black,
-                      ),
+                      style: TextStyle(color: isDark ? Colors.white : Colors.black),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                      isDark ? Colors.grey[850] : Colors.white,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 34,
-                        vertical: 12,
-                      ),
+                      backgroundColor: isDark ? Colors.grey[850] : Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 34, vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

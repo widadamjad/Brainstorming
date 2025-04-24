@@ -9,6 +9,7 @@ import 'package:foodtek/view/screens/section%204/history_screen.dart';
 import 'package:foodtek/view/screens/section%206/profile_screen.dart';
 import 'package:foodtek/view/widgets/carts/cart_total_widget.dart';
 import 'package:foodtek/view/widgets/carts/cart_item_widget.dart';
+import '../../../controller/location_controller.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
 import '../section 5/client_location_screen.dart';
 import '../section 3/favorites_screen.dart';
@@ -44,7 +45,7 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final theme = themeProvider.isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme;
     final textTheme = theme.textTheme;
-
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -68,14 +69,21 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
               children: [
                 Text(
                   AppLocalizations.of(context)!.current_location,
-                  style: textTheme.bodyMedium?.copyWith(fontSize: 15),
+                  style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black),
                 ),
-                Text(
-                  "Jl. Soekarno Hatta 15A..",
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
+                Consumer<LocationController>(
+                  builder: (context, locationController, child) {
+                    return Text(
+                      locationController.address.isNotEmpty
+                          ? locationController.address
+                          : AppLocalizations.of(context)!.set_location,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

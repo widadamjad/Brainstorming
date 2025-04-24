@@ -3,16 +3,17 @@ import 'package:foodtek/view/screens/section%203/filter_screen.dart';
 import 'package:foodtek/view/screens/section%203/order_details_screen.dart';
 import 'package:foodtek/view/screens/section%206/profile_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../controller/location_controller.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
 import '../../widgets/category_button_widget.dart';
 import '../../widgets/foods/food_cart2_widget.dart';
 import '../section 5/client_location_screen.dart';
 import '../section 4/delete_cart_screen.dart';
 import 'favorites_screen.dart';
-
 import '../section 4/history_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
+import 'package:provider/provider.dart';
 
 class PizzaScreen extends StatefulWidget {
   const PizzaScreen({super.key});
@@ -40,6 +41,8 @@ class _PizzaScreenState extends State<PizzaScreen> {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
 
+    final locationController = Provider.of<LocationController>(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -60,13 +63,12 @@ class _PizzaScreenState extends State<PizzaScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-              AppLocalizations.of(
-              context,
-            )!.current_location,
+                  AppLocalizations.of(context)!.current_location,
                   style: TextStyle(fontSize: 15, color: theme.textTheme.bodyMedium!.color),
                 ),
+                // عرض العنوان من LocationController
                 Text(
-                  "Jl. Soekarno Hatta 15A..",
+                  locationController.address, // العنوان من LocationController
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -93,7 +95,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
         ),
       ),
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -124,7 +126,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
               child: Row(
                 children: [
                   CategoryButtonWidget(
-                    title:  AppLocalizations.of(
+                    title: AppLocalizations.of(
                       context,
                     )!.all,
                     isSelected: false,
@@ -220,25 +222,25 @@ class _PizzaScreenState extends State<PizzaScreen> {
               BottomNavItemWidget(
                 icon: Icons.home,
                 label: AppLocalizations.of(context)!.home,
-                isSelected: selectedIndex == 1,
+                isSelected: selectedIndex == 0,
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => HomeScreen()),
                   );
-                  onItemTapped(1);
+                  onItemTapped(0);
                 },
               ),
               BottomNavItemWidget(
                 icon: Icons.favorite,
                 label: AppLocalizations.of(context)!.favorite,
-                isSelected: selectedIndex == 0,
+                isSelected: selectedIndex == 1,
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => FavoritesScreen()),
                   );
-                  onItemTapped(0);
+                  onItemTapped(1);
                 },
               ),
               const SizedBox(width: 40), // space for FAB
