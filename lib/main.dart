@@ -7,7 +7,7 @@ import 'package:foodtek/controller/signup_controller.dart';
 import 'package:foodtek/controller/track_location_controller.dart';
 import 'package:foodtek/controller/login_controller.dart';
 import 'package:foodtek/controller/lang_controller.dart';
-import 'package:foodtek/view/screens/section%201/splash_screen.dart';
+import 'package:foodtek/view/screens/section_1/splash_screen.dart';
 
 import 'core/app_theme.dart';
 import 'core/theme_provider.dart';

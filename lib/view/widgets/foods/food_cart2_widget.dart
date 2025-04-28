@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../screens/section 3/remove_favourite_screen.dart';
+import '../../screens/section_3/remove_favourite_screen.dart';
 
 class FoodCard2Widget extends StatefulWidget {
   final String title;
