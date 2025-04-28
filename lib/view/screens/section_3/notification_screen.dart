@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:foodtek/view/screens/section_3/filter_screen.dart';
+import 'package:foodtek/view/screens/section_3/home_screen.dart';
 import '../../../model/notification_model.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../section_5/client_location_screen.dart';
-import 'filter_screen.dart';
-import 'home_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:foodtek/view/screens/section_6/profile_screen.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
-import '../section_4/delete_cart_screen.dart';
-import '../section_4/history_screen.dart';
 import '../section_5/client_location_screen.dart';
-import '../section_6/profile_screen.dart';
+import '../section_4/delete_cart_screen.dart';
 import 'favorites_screen.dart';
+import '../section_4/history_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

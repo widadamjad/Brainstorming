@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:foodtek/view/screens/section_4/history_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
-import '../section_3/favorites_screen.dart';
-import '../section_3/notification_screen.dart';
 import '../section_6/profile_screen.dart';
 import 'cart_empty_screen.dart';
 import 'delete_cart_screen.dart';
-import 'history_screen.dart';
+import '../section_3/favorites_screen.dart';
+import '../section_3/home_screen.dart';
+import '../section_3/notification_screen.dart';
 
 class HistoryEmptyScreen extends StatefulWidget {
   const HistoryEmptyScreen({super.key});
