@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../controller/location_controller.dart';
+import 'package:foodtek/view/screens/section_3/filter_screen.dart';
+import 'package:foodtek/view/screens/section_3/home_screen.dart';
 import '../../../model/notification_model.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../section_5/client_location_screen.dart';
-import 'filter_screen.dart';
-import 'home_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -73,7 +70,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final location = Provider.of<LocationController>(context).address;
 
     List<NotificationModel> filteredNotifications = notifications;
     if (selectedTab == 1) {
@@ -105,13 +101,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  AppLocalizations.of(context)!.current_location,
-                  style: const TextStyle(fontSize: 15),
-                ),
-                Text(
-                  location.isNotEmpty ? location : AppLocalizations.of(context)!.set_location,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                const Text("Current location", style: TextStyle(fontSize: 15)),
+                const Text(
+                  "Jl. Soekarno Hatta 15A..",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
               ],
             ),

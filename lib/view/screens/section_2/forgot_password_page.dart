@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:foodtek/view/screens/section_2/Congra_screen.dart';
+import 'package:foodtek/view/screens/section_2/login_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../controller/lang_controller.dart';
 import '../../../controller/login_controller.dart';
-import 'Congra_screen.dart';
-import 'login_screen.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   @override

@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:foodtek/view/screens/section_2/login_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'login_screen.dart';
 
 
 class CongraScreen extends StatefulWidget {

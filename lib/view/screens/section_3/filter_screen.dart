@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../controller/location_controller.dart';
+import 'package:foodtek/view/screens/section_6/profile_screen.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
-import '../section_4/delete_cart_screen.dart';
 import '../section_5/client_location_screen.dart';
-import '../section_6/profile_screen.dart';
+import '../section_4/delete_cart_screen.dart';
 import 'favorites_screen.dart';
 import '../section_4/history_screen.dart';
 import 'home_screen.dart';
@@ -78,23 +76,14 @@ class _FilterScreenState extends State<FilterScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(AppLocalizations.of(context)!.current_location, style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black)),
                 Text(
-                  AppLocalizations.of(context)!.current_location,
-                  style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black),
-                ),
-                Consumer<LocationController>(
-                  builder: (context, locationController, child) {
-                    return Text(
-                      locationController.address.isNotEmpty
-                          ? locationController.address
-                          : AppLocalizations.of(context)!.set_location,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                      ),
-                    );
-                  },
+                  "Jl. Soekarno Hatta 15A..",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                 ),
               ],
             ),

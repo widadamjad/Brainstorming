@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:foodtek/view/screens/section_6/track_location_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:foodtek/view/screens/section_2/login_screen.dart';
+import 'package:foodtek/view/screens/section_3/home_screen.dart';
+import 'package:foodtek/view/screens/section_4/delete_cart_screen.dart';
+import 'package:foodtek/view/screens/section_6/detail_profile_screen.dart';
 import '../../../controller/lang_controller.dart';
 import '../../../core/theme_provider.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
-import '../section_2/login_screen.dart';
 import '../section_3/favorites_screen.dart';
-import '../section_3/home_screen.dart';
-import '../section_4/delete_cart_screen.dart';
-import 'detail_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

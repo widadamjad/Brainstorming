@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:foodtek/view/screens/section_4/delete_cart_screen.dart';
+import 'package:foodtek/view/screens/section_6/profile_screen.dart';
 import 'package:foodtek/view/widgets/history_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../controller/location_controller.dart';
 import '../../../core/app_theme.dart';
 import '../../../core/theme_provider.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
+import '../section_5/client_location_screen.dart';
 import '../section_3/favorites_screen.dart';
 import '../section_3/home_screen.dart';
 import '../section_3/notification_screen.dart';
 import 'package:provider/provider.dart';
-
-import '../section_5/client_location_screen.dart';
-import '../section_6/profile_screen.dart';
-import 'delete_cart_screen.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -41,7 +39,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final theme = themeProvider.isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme;
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -67,21 +65,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
               children: [
                 Text(
                   AppLocalizations.of(context)!.current_location,
-                  style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black),
+                  style: TextStyle(fontSize: 15),
                 ),
-                Consumer<LocationController>(
-                  builder: (context, locationController, child) {
-                    return Text(
-                      locationController.address.isNotEmpty
-                          ? locationController.address
-                          : AppLocalizations.of(context)!.set_location,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                      ),
-                    );
-                  },
+                Text(
+                  "Jl. Soekarno Hatta 15A..",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: theme.textTheme.bodyMedium!.color,
+                  ),
                 ),
               ],
             ),

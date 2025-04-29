@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'intro_screen.dart';
+import 'package:foodtek/view/screens/section_2/Congra_screen.dart';
+import 'package:foodtek/view/screens/section_1/intro_screen.dart';
 //import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {

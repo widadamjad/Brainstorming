@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:foodtek/view/screens/section_3/filter_screen.dart';
+import 'package:foodtek/view/screens/section_6/profile_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import '../../../controller/location_controller.dart';
-import '../../../controller/favorites_controller.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
 import '../../widgets/foods/food_cart2_widget.dart';
+import '../section_5/client_location_screen.dart';
 import '../section_4/delete_cart_screen.dart';
 import '../section_4/history_screen.dart';
-import '../section_5/client_location_screen.dart';
-import '../section_6/profile_screen.dart';
-import 'filter_screen.dart';
 import 'home_screen.dart';
 import 'notification_screen.dart';
 
@@ -22,7 +18,14 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
+  int selectedIndex1 = 0;
   int selectedIndex3 = 0;
+
+  void onItemTapped1(int index1) {
+    setState(() {
+      selectedIndex1 = index1;
+    });
+  }
 
   void onItemTapped3(int index3) {
     setState(() {
@@ -34,9 +37,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
-    final favoritesController = Provider.of<FavoritesController>(context);
-    final favorites = favoritesController.favorites;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -66,19 +66,13 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   AppLocalizations.of(context)!.current_location,
                   style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black),
                 ),
-                Consumer<LocationController>(
-                  builder: (context, locationController, child) {
-                    return Text(
-                      locationController.address.isNotEmpty
-                          ? locationController.address
-                          : AppLocalizations.of(context)!.set_location,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                      ),
-                    );
-                  },
+                Text(
+                  "Jl. Soekarno Hatta 15A..",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                 ),
               ],
             ),
@@ -107,7 +101,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           children: [
             TextFormField(
               decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
+                hintText:
+                AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
                 prefixIcon: Icon(Icons.search, color: isDarkMode ? Colors.white : Colors.black),
                 suffixIcon: IconButton(
                   onPressed: () {
@@ -137,31 +132,57 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             ),
             SizedBox(height: 10),
             Expanded(
-              child: favorites.isEmpty
-                  ? Center(
-                child: Text(
-                  AppLocalizations.of(context)!.no_favorites_yet,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white70 : Colors.black54,
-                    fontSize: 16,
-                  ),
-                ),
-              )
-                  : GridView.count(
+              child: GridView.count(
                 crossAxisCount: 2,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
                 childAspectRatio: screenWidth / (screenWidth * 1.3),
-                children: favorites.map((item) {
-                  return FoodCard2Widget(
-                    title: item.title,
-                    description: item.description,
-                    price: item.price,
-                    imagePath: item.imagePath,
-                    rating: item.rating,
+                children: [
+                  FoodCard2Widget(
+                    title: AppLocalizations.of(context)!.pepperoni_pizza,
+                    description:
+                    AppLocalizations.of(
+                      context,
+                    )!.pepperoni_pizza_margarita_pizza_margherita_italian_cuisine_tomato,
+                    price: "29.00",
+                    imagePath: "assets/images/pizza (1).png",
+                    rating: 4.5,
                     isRed: true,
-                  );
-                }).toList(),
+                  ),
+                  FoodCard2Widget(
+                    title: AppLocalizations.of(context)!.pizza_cheese,
+                    description:
+                    AppLocalizations.of(
+                      context,
+                    )!.food_pizza_dish_cuisine_junk_food_fast_food_flatbread_ingredient,
+                    price: "23.00",
+                    imagePath: "assets/images/pizza1.png",
+                    rating: 4.3,
+                    isRed: true,
+                  ),
+                  FoodCard2Widget(
+                    title: AppLocalizations.of(context)!.peppy_paneer,
+                    description:
+                    AppLocalizations.of(
+                      context,
+                    )!.chunky_paneer_with_crisp_capsicum_and_spicy_red_pepper,
+                    price: "13.00",
+                    imagePath: "assets/images/pizza2.png",
+                    rating: 4.2,
+                    isRed: true,
+                  ),
+                  FoodCard2Widget(
+                    title: AppLocalizations.of(context)!.mexican_green_wave,
+                    description:
+                    AppLocalizations.of(
+                      context,
+                    )!.a_pizza_loaded,
+                    price: "23.00",
+                    imagePath: "assets/images/pizza3.png",
+                    rating: 4.7,
+                    isRed: true,
+                  ),
+                ],
               ),
             ),
           ],

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:foodtek/view/screens/section_3/favorites_screen.dart';
+import 'package:foodtek/view/screens/section_3/home_screen.dart';
+import 'package:foodtek/view/screens/section_4/delete_cart_screen.dart';
+import 'package:foodtek/view/screens/section_4/history_screen.dart';
+import 'package:foodtek/view/screens/section_5/client_location_screen.dart';
+import 'package:foodtek/view/screens/section_6/profile_screen.dart';
+import 'package:foodtek/view/screens/section_6/track_location_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
-import '../section_3/favorites_screen.dart';
-import '../section_4/delete_cart_screen.dart';
-import '../section_6/profile_screen.dart';
-import '../section_6/track_location_screen.dart';
 
 class TrackOrderScreen extends StatefulWidget {
   const TrackOrderScreen({super.key});

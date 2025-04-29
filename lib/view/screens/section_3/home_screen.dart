@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:foodtek/view/screens/section_5/client_location_screen.dart';
+import 'package:foodtek/view/screens/section_4/delete_cart_screen.dart';
+import 'package:foodtek/view/screens/section_3/favorites_screen.dart';
+import 'package:foodtek/view/screens/section_4/history_screen.dart';
+import 'package:foodtek/view/screens/section_3/notification_screen.dart';
+import 'package:foodtek/view/screens/section_3/order_details_screen.dart';
 import 'package:foodtek/view/screens/section_3/pizza_home_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:foodtek/view/screens/section_6/profile_screen.dart';
 import 'package:foodtek/view/widgets/foods/food_card_widget.dart';
 import 'package:foodtek/view/widgets/recommended_card_widget.dart';
-import 'package:foodtek/view/widgets/bottom_nav_Item_widget.dart';
-import 'package:foodtek/view/widgets/category_button_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../controller/location_controller.dart';
-import '../section_4/delete_cart_screen.dart';
-import '../section_4/history_screen.dart';
-import '../section_5/client_location_screen.dart';
-import '../section_6/profile_screen.dart';
-import 'favorites_screen.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../widgets/bottom_nav_Item_widget.dart';
+import '../../widgets/category_button_widget.dart';
 import 'filter_screen.dart';
-import 'notification_screen.dart';
-import 'order_details_screen.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   final LatLng? userLocation;
@@ -33,6 +32,38 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex2 = 0;
   final PageController pageController = PageController();
   int currentPage = 0;
+  String locationAddress = "Fetching location...";
+
+  @override
+  void initState() {
+    super.initState();
+    _getAddressFromLatLng();
+  }
+
+  Future<void> _getAddressFromLatLng() async {
+    if (widget.userLocation != null) {
+      try {
+        List<Placemark> placemarks = await placemarkFromCoordinates(
+          widget.userLocation!.latitude,
+          widget.userLocation!.longitude,
+        );
+        if (placemarks.isNotEmpty) {
+          final place = placemarks.first;
+          setState(() {
+            locationAddress = "${place.street}, ${place.subLocality}, ${place.locality}";
+          });
+        }
+      } catch (e) {
+        setState(() {
+          locationAddress = "Failed to get address";
+        });
+      }
+    } else {
+      setState(() {
+        locationAddress = "Location not available";
+      });
+    }
+  }
 
   void onItemTapped(int index) {
     setState(() {
@@ -83,22 +114,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.current_location,
-                    style: TextStyle(fontSize: 15, color: isDark ? Colors.white : Colors.black),
+                    style: TextStyle(fontSize: 13, color: textColor),
                   ),
-                  Consumer<LocationController>(
-                    builder: (context, locationController, child) {
-                      return Text(
-                        locationController.address.isNotEmpty
-                            ? locationController.address
-                            : AppLocalizations.of(context)!.set_location,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: isDark ? Colors.white : Colors.black,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      );
-                    },
+                  Text(
+                    locationAddress,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -123,22 +148,25 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
-                  prefixIcon: Icon(Icons.search),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => FilterScreen()));
-                    },
-                    icon: Icon(Icons.tune),
+              SizedBox(
+                width: double.infinity,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => FilterScreen()));
+                      },
+                      icon: Icon(Icons.tune),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none,
+                    ),
+                    fillColor: isDark ? Colors.grey[800] : Colors.grey[200],
+                    filled: true,
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide.none,
-                  ),
-                  fillColor: isDark ? Colors.grey[800] : Colors.grey[200],
-                  filled: true,
                 ),
               ),
               SizedBox(height: 8),

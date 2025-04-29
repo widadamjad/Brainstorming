@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foodtek/view/screens/section_4/delete_cart_screen.dart';
+import 'package:foodtek/view/screens/section_6/profile_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import '../../../controller/location_controller.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
-import '../section_4/delete_cart_screen.dart';
 import '../section_5/client_location_screen.dart';
-import '../section_6/profile_screen.dart';
 import 'favorites_screen.dart';
 import 'filter_screen.dart';
 import '../section_4/history_screen.dart';
@@ -38,8 +36,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     final textColor = isDark ? Colors.white : Colors.black;
     final secondaryTextColor = isDark ? Colors.grey[400] : Colors.grey[700];
     final fillColor = isDark ? Colors.grey[900] : Colors.grey[200];
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -60,27 +56,21 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               },
               icon: Icon(Icons.location_on, color: Colors.green, size: 31),
             ),
-            SizedBox(width: screenWidth * 0.02), // Dynamic spacing
+            SizedBox(width: 5),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   AppLocalizations.of(context)!.current_location,
-                  style: TextStyle(fontSize: 15, color: isDark ? Colors.white : Colors.black),
+                  style: TextStyle(fontSize: 15, color: textColor),
                 ),
-                Consumer<LocationController>(
-                  builder: (context, locationController, child) {
-                    return Text(
-                      locationController.address.isNotEmpty
-                          ? locationController.address
-                          : AppLocalizations.of(context)!.set_location,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: isDark ? Colors.white : Colors.black,
-                      ),
-                    );
-                  },
+                Text(
+                  "Jl. Soekarno Hatta 15A..",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: textColor,
+                  ),
                 ),
               ],
             ),
@@ -104,8 +94,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           ],
         ),
       ),
-      body: SingleChildScrollView(  // Wrap the body with SingleChildScrollView for scrolling
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05, vertical: screenHeight * 0.02), // Dynamic padding
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -133,9 +123,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               ),
               style: TextStyle(color: textColor),
             ),
-            SizedBox(height: screenHeight * 0.02), // Dynamic spacing
+            SizedBox(height: 15),
             Container(child: Image.asset("assets/images/big_burger.png")),
-            SizedBox(height: screenHeight * 0.03),
+            SizedBox(height: 17),
             Text(
               AppLocalizations.of(context)!.cheeseburger_wendys_burger,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: textColor),
@@ -162,7 +152,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ),
               ],
             ),
-            SizedBox(height: screenHeight * 0.02),
+            SizedBox(height: 7),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -181,12 +171,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ),
               ],
             ),
-            SizedBox(height: screenHeight * 0.02),
+            SizedBox(height: 12),
             Text(
               AppLocalizations.of(context)!.product_description,
               style: TextStyle(color: secondaryTextColor),
             ),
-            SizedBox(height: screenHeight * 0.03),
+            SizedBox(height: 14),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -224,7 +214,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     ],
                   ),
                 ),
-                SizedBox(width: screenWidth * 0.1), // Dynamic spacing
+                SizedBox(width: 80),
                 Row(
                   children: [
                     Container(
@@ -273,7 +263,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ),
               ],
             ),
-            SizedBox(height: screenHeight * 0.02), // Dynamic spacing
+            SizedBox(height: 13),
             Center(
               child: TextButton(
                 onPressed: () {
@@ -284,7 +274,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.25, vertical: screenHeight * 0.02), // Dynamic padding
+                  padding: EdgeInsets.symmetric(horizontal: 110, vertical: 13),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -307,7 +297,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: SizedBox(
-          height: screenHeight * 0.12, // Dynamic bottom navigation bar height
+          height: 80,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -316,6 +306,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 label: AppLocalizations.of(context)!.home,
                 isSelected: selectedIndex2 == 0,
                 onTap: () => {
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => HomeScreen()),

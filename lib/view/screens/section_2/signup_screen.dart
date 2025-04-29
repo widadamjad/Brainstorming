@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodtek/view/screens/section_2/login_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/signup_widgets.dart';
-import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
