@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: isDark ? Colors.white : Colors.black,
                         ),
                       ),
-                      const SizedBox(height: 5),
+                     // const SizedBox(height: 5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -111,8 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             AppLocalizations.of(context)!.dont_have_an_account,
                             style: TextStyle(
                               fontFamily: 'Inter',
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
                               color: isDark ? Colors.white : Colors.black,
                             ),
                           ),
@@ -128,8 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(
                                 color: Colors.green,
                                 fontFamily: 'Inter',
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';  // إضافة Provider
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';  // Localization package
+import 'package:provider/provider.dart';  // Adding Provider
 
 import 'package:foodtek/view/screens/section_3/favorites_screen.dart';
 import 'package:foodtek/view/screens/section_3/home_screen.dart';
@@ -26,34 +26,33 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() => selectedIndex = index);
   }
 
-  final List<Map<String, String>> messages = [
-    {"text": "Hello chatGPT, how are you today?", "sender": "user"},
-    {"text": "Hello, I'm fine, how can I help you?", "sender": "bot"},
-    {"text": "What is the best programming language?", "sender": "user"},
-    {
-      "text":
-      "There are many programming languages in the market that are used in designing and building websites, various applications and other tasks. All these languages are popular in their place and in the way they are used, and many programmers learn and use them.",
-      "sender": "bot"
-    },
-    {"text": "So explain to me more", "sender": "user"},
-    {
-      "text":
-      "There are many programming languages in the market that are used in designing and building websites, various applications and other tasks. All these languages are popular in their place and in the way they are used, and many programmers learn and use them.",
-      "sender": "bot"
-    },
-  ];
-
   final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    // Messages are now created inside the build method to ensure context is valid
+    final List<Map<String, String>> messages = [
+      {"text": AppLocalizations.of(context)!.hello_chatgpt_how_are_you_today, "sender": "user"},
+      {"text": AppLocalizations.of(context)!.hello_i_m_fine_how_can_i_help_you, "sender": "bot"},
+      {"text": AppLocalizations.of(context)!.what_is_the_best_programming_language, "sender": "user"},
+      {
+        "text": AppLocalizations.of(context)!.there_are_many_programming_languages_in_the_market,
+        "sender": "bot"
+      },
+      {"text": AppLocalizations.of(context)!.so_explain_to_me_more, "sender": "user"},
+      {
+        "text": AppLocalizations.of(context)!.there_are_many_programming_languages_in_the_market,
+        "sender": "bot"
+      },
+    ];
+
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDarkMode = themeProvider.isDarkMode;
 
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
       appBar: AppBar(
-        title:  Text(AppLocalizations.of(context)!.chat),
+        title: Text(AppLocalizations.of(context)!.chat),
         backgroundColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
         foregroundColor: isDarkMode ? Colors.white : Colors.black,
         elevation: 0,
@@ -96,7 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           Padding(
-            padding:  EdgeInsets.fromLTRB(16, 8, 16, 16),
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
             child: Row(
               children: [
                 Expanded(
