@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:foodtek/core/theme_provider.dart';
 import 'package:foodtek/core/app_theme.dart';
-import 'package:foodtek/view/screens/section_4/cart_empty_screen.dart';
-import 'package:foodtek/view/screens/section_5/check_out_screen.dart';
-import 'package:foodtek/view/screens/section_3/filter_screen.dart';
-import 'package:foodtek/view/screens/section_4/history_screen.dart';
-import 'package:foodtek/view/screens/section_6/profile_screen.dart';
 import 'package:foodtek/view/widgets/carts/cart_total_widget.dart';
 import 'package:foodtek/view/widgets/carts/cart_item_widget.dart';
+import '../../../controller/location_controller.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
-import '../section_5/client_location_screen.dart';
 import '../section_3/favorites_screen.dart';
 import '../section_3/home_screen.dart';
 import '../section_3/notification_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../section_5/check_out_screen.dart';
+import '../section_5/client_location_screen.dart';
+import '../section_6/profile_screen.dart';
+import 'cart_empty_screen.dart';
+import 'history_screen.dart';
 
 class DeleteCartScreen extends StatefulWidget {
   const DeleteCartScreen({super.key});
@@ -44,7 +45,7 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final theme = themeProvider.isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme;
     final textTheme = theme.textTheme;
-
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -68,14 +69,21 @@ class _DeleteCartScreenState extends State<DeleteCartScreen> {
               children: [
                 Text(
                   AppLocalizations.of(context)!.current_location,
-                  style: textTheme.bodyMedium?.copyWith(fontSize: 15),
+                  style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black),
                 ),
-                Text(
-                  "Jl. Soekarno Hatta 15A..",
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
+                Consumer<LocationController>(
+                  builder: (context, locationController, child) {
+                    return Text(
+                      locationController.address.isNotEmpty
+                          ? locationController.address
+                          : AppLocalizations.of(context)!.set_location,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
