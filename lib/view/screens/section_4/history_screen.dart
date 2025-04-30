@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodtek/view/widgets/history_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:foodtek/view/widgets/history_widget.dart';
+import 'package:provider/provider.dart';
+
 import '../../../controller/location_controller.dart';
 import '../../../core/app_theme.dart';
 import '../../../core/theme_provider.dart';
@@ -8,8 +10,6 @@ import '../../widgets/bottom_nav_Item_widget.dart';
 import '../section_3/favorites_screen.dart';
 import '../section_3/home_screen.dart';
 import '../section_3/notification_screen.dart';
-import 'package:provider/provider.dart';
-
 import '../section_5/client_location_screen.dart';
 import '../section_6/profile_screen.dart';
 import 'delete_cart_screen.dart';
@@ -40,7 +40,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    final theme = themeProvider.isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme;
+    final theme =
+        themeProvider.isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme;
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
@@ -67,7 +68,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
               children: [
                 Text(
                   AppLocalizations.of(context)!.current_location,
-                  style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                 ),
                 Consumer<LocationController>(
                   builder: (context, locationController, child) {
@@ -112,15 +116,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
               children: [
                 Expanded(
                   child: TextButton(
-                    onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DeleteCartScreen(),
-                        ),
-                      ),
-                      onTabChanged(0),
-                    },
+                    onPressed:
+                        () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DeleteCartScreen(),
+                            ),
+                          ),
+                          onTabChanged(0),
+                        },
                     child: Column(
                       children: [
                         Text(
@@ -128,8 +133,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight:
-                            selectedTab == 1 ? FontWeight.bold : FontWeight.normal,
-                            color: selectedTab == 1 ? Colors.green : theme.textTheme.bodyMedium!.color,
+                                selectedTab == 1
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                            color:
+                                selectedTab == 1
+                                    ? Colors.green
+                                    : theme.textTheme.bodyMedium!.color,
                           ),
                         ),
                         if (selectedTab == 1)
@@ -144,15 +154,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 ),
                 Expanded(
                   child: TextButton(
-                    onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HistoryScreen(),
-                        ),
-                      ),
-                      onTabChanged(1),
-                    },
+                    onPressed:
+                        () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HistoryScreen(),
+                            ),
+                          ),
+                          onTabChanged(1),
+                        },
                     child: Column(
                       children: [
                         Text(
@@ -160,8 +171,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight:
-                            selectedTab == 0 ? FontWeight.bold : FontWeight.normal,
-                            color: selectedTab == 0 ? Colors.green : theme.textTheme.bodyMedium!.color,
+                                selectedTab == 0
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                            color:
+                                selectedTab == 0
+                                    ? Colors.green
+                                    : theme.textTheme.bodyMedium!.color,
                           ),
                         ),
                         if (selectedTab == 0)
@@ -234,14 +250,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 icon: Icons.home,
                 label: AppLocalizations.of(context)!.home,
                 isSelected: selectedIndex == 3,
-                onTap: () => {
+                onTap:
+                    () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      ),
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
-                  ),
-
-                  onItemTapped(3)},
+                      onItemTapped(3),
+                    },
               ),
               BottomNavItemWidget(
                 icon: Icons.favorite,
