@@ -30,8 +30,6 @@ void main() async {
         ChangeNotifierProvider(create: (_) => LangController()),
         ChangeNotifierProvider(create: (_) => LocationController()),
         ChangeNotifierProvider(create: (_) => FavoritesController()),
-
-
       ],
       child: const MyApp(),
     ),
@@ -50,8 +48,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
 
           locale: langController.locale,
-          supportedLocales:  [Locale('en'), Locale('ar')],
-          localizationsDelegates:  [
+          supportedLocales: [Locale('en'), Locale('ar')],
+          localizationsDelegates: [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -62,7 +60,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: themeProvider.themeMode,
 
-          home:  PizzaScreen(),
+          home: PizzaScreen(),
         );
       },
     );

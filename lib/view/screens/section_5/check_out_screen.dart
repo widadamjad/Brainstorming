@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme_provider.dart';
-import '../../widgets/bottom_nav_Item_widget.dart';
-import '../../widgets/carts/cart_total_widget.dart';
-import '../section_3/favorites_screen.dart';
-import '../section_3/notification_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/theme_provider.dart';
+import '../../widgets/bottom_nav_Item_widget.dart';
+import '../../widgets/carts/cart_total_widget.dart';
+import '../section_3/notification_screen.dart';
 import 'add_card_screen.dart';
 
 class CheckOutScreen extends StatefulWidget {
@@ -71,14 +70,13 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 size: 20,
                 color: isSelected ? Colors.green : Colors.grey,
               ),
-              if (isSelected)
-                Icon(Icons.circle, size: 8, color: Colors.green),
+              if (isSelected) Icon(Icons.circle, size: 8, color: Colors.green),
             ],
           ),
           SizedBox(width: 8),
           // Optional icon
           if (icon != null) icon,
-          if (icon != null)  SizedBox(width: 8),
+          if (icon != null) SizedBox(width: 8),
           // Label text
           Text(
             label,
@@ -106,7 +104,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             IconButton(
-              icon:  Icon(
+              icon: Icon(
                 Icons.notifications_none,
                 color: isDarkMode ? Colors.white : Colors.black,
                 size: 31,
@@ -114,9 +112,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) =>  NotificationScreen(),
-                  ),
+                  MaterialPageRoute(builder: (context) => NotificationScreen()),
                 );
               },
             ),
@@ -124,18 +120,26 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding:  EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               AppLocalizations.of(context)!.checkout,
-              style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
+              style: TextStyle(
+                fontSize: 21,
+                fontWeight: FontWeight.bold,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
             ),
             SizedBox(height: 10),
             Text(
               AppLocalizations.of(context)!.pay_with,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
             ),
             SizedBox(height: 10),
             Column(
@@ -145,7 +149,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   children: [
                     Stack(
                       alignment: Alignment.center,
-                      children:  [
+                      children: [
                         Icon(
                           Icons.circle_outlined,
                           size: 20,
@@ -157,7 +161,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     SizedBox(width: 12),
                     Text(
                       AppLocalizations.of(context)!.zurab_88_gorgiladze_st,
-                      style: TextStyle(fontSize: 16, color: isDarkMode ? Colors.white : Colors.black),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
                     ),
                   ],
                 ),
@@ -165,7 +172,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   padding: EdgeInsets.only(left: 36),
                   child: Text(
                     AppLocalizations.of(context)!.georgia_batumi,
-                    style: TextStyle(fontSize: 13, color: isDarkMode ? Colors.white70 : Colors.grey),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: isDarkMode ? Colors.white70 : Colors.grey,
+                    ),
                   ),
                 ),
               ],
@@ -175,17 +185,26 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children:  [
+                  children: [
                     Icon(Icons.location_on_outlined, color: Colors.green),
                     SizedBox(width: 12),
-                    Text(AppLocalizations.of(context)!.noe_5_zhordania_st, style: TextStyle(fontSize: 16, color: isDarkMode ? Colors.white : Colors.black)),
+                    Text(
+                      AppLocalizations.of(context)!.noe_5_zhordania_st,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
                   ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 36),
                   child: Text(
                     AppLocalizations.of(context)!.georgia_batumi,
-                    style: TextStyle(fontSize: 13, color: isDarkMode ? Colors.white70 : Colors.grey),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: isDarkMode ? Colors.white70 : Colors.grey,
+                    ),
                   ),
                 ),
               ],
@@ -195,7 +214,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               children: [
                 TextButton(
                   onPressed: () {},
-                  child:  Text(
+                  child: Text(
                     AppLocalizations.of(context)!.change,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -211,7 +230,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               children: [
                 Text(
                   AppLocalizations.of(context)!.promo_code,
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
+                  style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                 ),
                 SizedBox(height: 10),
                 Row(
@@ -220,15 +243,18 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       child: TextField(
                         controller: promoController,
                         decoration: InputDecoration(
-                          hintText:AppLocalizations.of(context)!.enter_your_promo,
+                          hintText:
+                              AppLocalizations.of(context)!.enter_your_promo,
                           border: OutlineInputBorder(
-                            borderRadius:  BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               bottomLeft: Radius.circular(10),
                             ),
-                            borderSide: BorderSide(color: isDarkMode ? Colors.white70 : Colors.grey),
+                            borderSide: BorderSide(
+                              color: isDarkMode ? Colors.white70 : Colors.grey,
+                            ),
                           ),
-                          contentPadding:  EdgeInsets.symmetric(
+                          contentPadding: EdgeInsets.symmetric(
                             horizontal: 12,
                             vertical: 14,
                           ),
@@ -240,7 +266,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
-                          shape:  RoundedRectangleBorder(
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(10),
                               bottomRight: Radius.circular(10),
@@ -248,7 +274,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                           ),
                         ),
                         onPressed: applyPromoCode,
-                        child:  Text(
+                        child: Text(
                           AppLocalizations.of(context)!.apply,
                           style: TextStyle(color: Colors.white),
                         ),
@@ -264,7 +290,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               children: [
                 Text(
                   AppLocalizations.of(context)!.payment_method,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                 ),
                 SizedBox(height: 10),
                 Row(
@@ -291,7 +321,11 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.card_type,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
                   ),
                   SizedBox(height: 10),
                   Row(
@@ -299,15 +333,26 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       buildSelectionOption(
                         isSelected: selectedCardType == 'visa',
                         label: '',
-                        icon: Image.asset("assets/images/mastercard.png",fit: BoxFit.cover,width: 30,height: 30,),
+                        icon: Image.asset(
+                          "assets/images/mastercard.png",
+                          fit: BoxFit.cover,
+                          width: 30,
+                          height: 30,
+                        ),
                         onTap: () => setState(() => selectedCardType = 'visa'),
                       ),
                       SizedBox(width: 20),
                       buildSelectionOption(
                         isSelected: selectedCardType == 'paypal',
                         label: '',
-                        icon: Image.asset("assets/images/visa.png",fit: BoxFit.cover,width: 40,height: 40,),
-                        onTap: () => setState(() => selectedCardType = 'paypal'),
+                        icon: Image.asset(
+                          "assets/images/visa.png",
+                          fit: BoxFit.cover,
+                          width: 40,
+                          height: 40,
+                        ),
+                        onTap:
+                            () => setState(() => selectedCardType = 'paypal'),
                       ),
                     ],
                   ),
@@ -320,7 +365,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               delivery: 5.0,
               discount: discount,
               onOrderPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>AddCardScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddCardScreen()),
+                );
               },
             ),
           ],

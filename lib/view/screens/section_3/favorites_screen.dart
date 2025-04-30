@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import '../../../controller/location_controller.dart';
+
 import '../../../controller/favorites_controller.dart';
+import '../../../controller/location_controller.dart';
 import '../../widgets/bottom_nav_Item_widget.dart';
 import '../../widgets/foods/food_cart2_widget.dart';
 import '../section_4/delete_cart_screen.dart';
@@ -56,7 +56,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   ),
                 );
               },
-              icon: Icon(Icons.location_on, color: isDarkMode ? Colors.white : Colors.green, size: 31),
+              icon: Icon(
+                Icons.location_on,
+                color: isDarkMode ? Colors.white : Colors.green,
+                size: 31,
+              ),
             ),
             SizedBox(width: 5),
             Column(
@@ -64,7 +68,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               children: [
                 Text(
                   AppLocalizations.of(context)!.current_location,
-                  style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white : Colors.black),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                 ),
                 Consumer<LocationController>(
                   builder: (context, locationController, child) {
@@ -82,7 +89,13 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 ),
               ],
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_drop_down, color: isDarkMode ? Colors.white : Colors.black)),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.arrow_drop_down,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
             Spacer(),
             IconButton(
               icon: Icon(
@@ -107,8 +120,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           children: [
             TextFormField(
               decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
-                prefixIcon: Icon(Icons.search, color: isDarkMode ? Colors.white : Colors.black),
+                hintText:
+                    AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
                 suffixIcon: IconButton(
                   onPressed: () {
                     Navigator.push(
@@ -116,7 +133,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       MaterialPageRoute(builder: (context) => FilterScreen()),
                     );
                   },
-                  icon: Icon(Icons.tune, color: isDarkMode ? Colors.white : Colors.black),
+                  icon: Icon(
+                    Icons.tune,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -137,32 +157,34 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             ),
             SizedBox(height: 10),
             Expanded(
-              child: favorites.isEmpty
-                  ? Center(
-                child: Text(
-                  AppLocalizations.of(context)!.no_favorites_yet,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white70 : Colors.black54,
-                    fontSize: 16,
-                  ),
-                ),
-              )
-                  : GridView.count(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: screenWidth / (screenWidth * 1.3),
-                children: favorites.map((item) {
-                  return FoodCard2Widget(
-                    title: item.title,
-                    description: item.description,
-                    price: item.price,
-                    imagePath: item.imagePath,
-                    rating: item.rating,
-                    isRed: true,
-                  );
-                }).toList(),
-              ),
+              child:
+                  favorites.isEmpty
+                      ? Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.no_favorites_yet,
+                          style: TextStyle(
+                            color: isDarkMode ? Colors.white70 : Colors.black54,
+                            fontSize: 16,
+                          ),
+                        ),
+                      )
+                      : GridView.count(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        childAspectRatio: screenWidth / (screenWidth * 1.3),
+                        children:
+                            favorites.map((item) {
+                              return FoodCard2Widget(
+                                title: item.title,
+                                description: item.description,
+                                price: item.price,
+                                imagePath: item.imagePath,
+                                rating: item.rating,
+                                isRed: true,
+                              );
+                            }).toList(),
+                      ),
             ),
           ],
         ),

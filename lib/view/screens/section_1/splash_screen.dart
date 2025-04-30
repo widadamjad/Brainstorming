@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import 'intro_screen.dart';
 //import 'package:provider/provider.dart';
 
@@ -15,20 +17,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(
-      Duration(seconds: 4),
-          () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => IntroScreen(),
-          ),
-        );
-      },
-    );
-
-
+    Timer(Duration(seconds: 4), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => IntroScreen()),
+      );
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +45,6 @@ class _SplashScreenState extends State<SplashScreen> {
         //   ),
         //
       ),
-
-
     );
-
   }
 }

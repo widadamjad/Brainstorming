@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:foodtek/view/screens/section_3/pizza_home_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:foodtek/view/widgets/foods/food_card_widget.dart';
-import 'package:foodtek/view/widgets/recommended_card_widget.dart';
 import 'package:foodtek/view/widgets/bottom_nav_Item_widget.dart';
 import 'package:foodtek/view/widgets/category_button_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:foodtek/view/widgets/foods/food_card_widget.dart';
+import 'package:foodtek/view/widgets/recommended_card_widget.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+
 import '../../../controller/location_controller.dart';
 import '../section_4/delete_cart_screen.dart';
 import '../section_4/history_screen.dart';
@@ -71,11 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              icon: Icon(
-                Icons.location_on,
-                color: Colors.green,
-                size: 28,
-              ),
+              icon: Icon(Icons.location_on, color: Colors.green, size: 28),
             ),
             Expanded(
               child: Column(
@@ -83,7 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.current_location,
-                    style: TextStyle(fontSize: 15, color: isDark ? Colors.white : Colors.black),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
                   ),
                   Consumer<LocationController>(
                     builder: (context, locationController, child) {
@@ -125,11 +124,17 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               TextFormField(
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.search_menu_restaurant_or_etc,
+                  hintText:
+                      AppLocalizations.of(
+                        context,
+                      )!.search_menu_restaurant_or_etc,
                   prefixIcon: Icon(Icons.search),
                   suffixIcon: IconButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => FilterScreen()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FilterScreen()),
+                      );
                     },
                     icon: Icon(Icons.tune),
                   ),
@@ -155,7 +160,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: '🍔 ${AppLocalizations.of(context)!.burger}',
                       isSelected: selectedIndex == 1,
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetailsScreen()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OrderDetailsScreen(),
+                          ),
+                        );
                         onItemTapped(1);
                       },
                     ),
@@ -163,7 +173,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: '🍕  ${AppLocalizations.of(context)!.pizza}',
                       isSelected: selectedIndex == 2,
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PizzaScreen()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PizzaScreen(),
+                          ),
+                        );
                         onItemTapped(2);
                       },
                     ),
@@ -191,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   children: List.generate(
                     5,
-                        (index) => Image.asset(
+                    (index) => Image.asset(
                       "assets/images/offer.pizza.png",
                       fit: BoxFit.fill,
                     ),
@@ -203,13 +218,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   5,
-                      (index) => Container(
+                  (index) => Container(
                     margin: EdgeInsets.symmetric(horizontal: 4),
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: currentPage == index ? Colors.green : Colors.grey[300],
+                      color:
+                          currentPage == index
+                              ? Colors.green
+                              : Colors.grey[300],
                     ),
                   ),
                 ),
@@ -217,7 +235,11 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 10),
               Text(
                 AppLocalizations.of(context)!.top_rated,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: textColor),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  color: textColor,
+                ),
               ),
               SizedBox(height: 5),
               SizedBox(
@@ -227,17 +249,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     FoodCardWidget(
                       title: AppLocalizations.of(context)!.chicken_burger,
-                      description: AppLocalizations.of(context)!.key_100_gr_chicken,
+                      description:
+                          AppLocalizations.of(context)!.key_100_gr_chicken,
                       price: "20.00",
                       imagePath: "assets/images/burger1.png",
                       rating: 3.8,
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetailsScreen()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OrderDetailsScreen(),
+                          ),
+                        );
                       },
                     ),
                     FoodCardWidget(
                       title: AppLocalizations.of(context)!.cheese_burger,
-                      description: AppLocalizations.of(context)!.key_100_gr_meat_onion,
+                      description:
+                          AppLocalizations.of(context)!.key_100_gr_meat_onion,
                       price: "15.00",
                       imagePath: "assets/images/burger2.png",
                       rating: 4.5,
@@ -245,7 +274,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     FoodCardWidget(
                       title: AppLocalizations.of(context)!.chicken_burger,
-                      description: AppLocalizations.of(context)!.key_100_gr_chicken,
+                      description:
+                          AppLocalizations.of(context)!.key_100_gr_chicken,
                       price: "20.00",
                       imagePath: "assets/images/burger1.png",
                       rating: 3.8,
@@ -253,7 +283,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     FoodCardWidget(
                       title: AppLocalizations.of(context)!.cheese_burger,
-                      description: AppLocalizations.of(context)!.key_100_gr_meat_onion,
+                      description:
+                          AppLocalizations.of(context)!.key_100_gr_meat_onion,
                       price: "20.00",
                       imagePath: "assets/images/burger2.png",
                       rating: 3.8,
@@ -268,7 +299,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.recommend,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {},
@@ -284,10 +319,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    RecommendedCardWidget(imagePath: "assets/images/suchi.png", price: "\$103.0"),
-                    RecommendedCardWidget(imagePath: "assets/images/rice.png", price: "\$50.0"),
-                    RecommendedCardWidget(imagePath: "assets/images/pasta.png", price: "\$12.99"),
-                    RecommendedCardWidget(imagePath: "assets/images/cake.png", price: "\$8.20"),
+                    RecommendedCardWidget(
+                      imagePath: "assets/images/suchi.png",
+                      price: "\$103.0",
+                    ),
+                    RecommendedCardWidget(
+                      imagePath: "assets/images/rice.png",
+                      price: "\$50.0",
+                    ),
+                    RecommendedCardWidget(
+                      imagePath: "assets/images/pasta.png",
+                      price: "\$12.99",
+                    ),
+                    RecommendedCardWidget(
+                      imagePath: "assets/images/cake.png",
+                      price: "\$8.20",
+                    ),
                   ],
                 ),
               ),
@@ -315,7 +362,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: AppLocalizations.of(context)!.favorite,
                 isSelected: selectedIndex2 == 1,
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FavoritesScreen()),
+                  );
                   onItemTapped2(1);
                 },
               ),
@@ -325,7 +375,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: AppLocalizations.of(context)!.history,
                 isSelected: selectedIndex2 == 3,
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HistoryScreen()),
+                  );
                   onItemTapped2(3);
                 },
               ),
@@ -334,7 +387,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: AppLocalizations.of(context)!.profile,
                 isSelected: selectedIndex2 == 4,
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileScreen()),
+                  );
                   onItemTapped2(4);
                 },
               ),
@@ -345,7 +401,10 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DeleteCartScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DeleteCartScreen()),
+          );
           onItemTapped2(2);
         },
         child: const Icon(Icons.shopping_cart, color: Colors.white, size: 30),

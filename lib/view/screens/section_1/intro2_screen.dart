@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../controller/lang_controller.dart';
 import 'intro3_screen.dart';
 import 'intro4_location_screen.dart';

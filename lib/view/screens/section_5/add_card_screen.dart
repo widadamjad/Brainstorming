@@ -54,7 +54,14 @@ class _AddCardScreenState extends State<AddCardScreen> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        title:  Text(AppLocalizations.of(context)!.add_card, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
+        title: Text(
+          AppLocalizations.of(context)!.add_card,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
         actions: [
           IconButton(
             icon: Icon(
@@ -74,7 +81,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
       ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding:  EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -84,26 +91,48 @@ class _AddCardScreenState extends State<AddCardScreen> {
               expiryDate: _expiryController.text,
             ),
             const SizedBox(height: 10),
-            Text(AppLocalizations.of(context)!.name, style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white : Colors.grey)),
+            Text(
+              AppLocalizations.of(context)!.name,
+              style: TextStyle(
+                fontSize: 14,
+                color: isDarkMode ? Colors.white : Colors.grey,
+              ),
+            ),
             TextField(
               controller: _nameController,
               onChanged: (value) => setState(() {}),
               decoration: InputDecoration(
                 hintText: AppLocalizations.of(context)!.your_name,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 10,
+                ),
               ),
             ),
             const SizedBox(height: 10),
-            Text(AppLocalizations.of(context)!.card_number, style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white : Colors.grey)),
+            Text(
+              AppLocalizations.of(context)!.card_number,
+              style: TextStyle(
+                fontSize: 14,
+                color: isDarkMode ? Colors.white : Colors.grey,
+              ),
+            ),
             TextField(
               controller: _cardNumberController,
               onChanged: (value) => setState(() {}),
               decoration: InputDecoration(
                 hintText: "1234 1234 1234 1234",
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 suffixIcon: const Icon(Icons.credit_card),
-                contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 10,
+                ),
               ),
               keyboardType: TextInputType.number,
             ),
@@ -114,14 +143,25 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(AppLocalizations.of(context)!.expiry, style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white : Colors.grey)),
+                      Text(
+                        AppLocalizations.of(context)!.expiry,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isDarkMode ? Colors.white : Colors.grey,
+                        ),
+                      ),
                       TextField(
                         controller: _expiryController,
                         onChanged: (value) => setState(() {}),
                         decoration: InputDecoration(
                           hintText: "MM/YY",
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 10,
+                          ),
                         ),
                         keyboardType: TextInputType.datetime,
                       ),
@@ -133,12 +173,23 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(AppLocalizations.of(context)!.cvc, style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white : Colors.grey)),
+                      Text(
+                        AppLocalizations.of(context)!.cvc,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isDarkMode ? Colors.white : Colors.grey,
+                        ),
+                      ),
                       TextField(
                         decoration: InputDecoration(
                           hintText: "123",
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 10,
+                          ),
                         ),
                         keyboardType: TextInputType.number,
                       ),
@@ -149,8 +200,13 @@ class _AddCardScreenState extends State<AddCardScreen> {
             ),
             const SizedBox(height: 30),
             Text(
-              AppLocalizations.of(context)!.we_will_send_you_an_order_details_to_your_email_after_the_successfull_payment,
-              style: TextStyle(color: isDarkMode ? Colors.white : Colors.black54, fontSize: 12),
+              AppLocalizations.of(
+                context,
+              )!.we_will_send_you_an_order_details_to_your_email_after_the_successfull_payment,
+              style: TextStyle(
+                color: isDarkMode ? Colors.white : Colors.black54,
+                fontSize: 12,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
@@ -160,13 +216,23 @@ class _AddCardScreenState extends State<AddCardScreen> {
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CheckOutDoneScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CheckOutDoneScreen(),
+                    ),
+                  );
                 },
                 icon: const Icon(Icons.lock, color: Colors.white),
-                label:  Text(AppLocalizations.of(context)!.pay_for_the_order, style: TextStyle(color: Colors.white, fontSize: 16)),
+                label: Text(
+                  AppLocalizations.of(context)!.pay_for_the_order,
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
               ),
             ),
           ],
@@ -192,7 +258,10 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 label: AppLocalizations.of(context)!.favorite,
                 isSelected: selectedIndex == 1,
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FavoritesScreen()),
+                  );
                   onItemTapped(1);
                 },
               ),
@@ -202,7 +271,12 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 label: AppLocalizations.of(context)!.track,
                 isSelected: selectedIndex == 3,
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => TrackLocationScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TrackLocationScreen(),
+                    ),
+                  );
                   onItemTapped(3);
                 },
               ),
@@ -211,7 +285,10 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 label: AppLocalizations.of(context)!.profile,
                 isSelected: selectedIndex == 4,
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileScreen()),
+                  );
                   onItemTapped(4);
                 },
               ),
@@ -222,7 +299,10 @@ class _AddCardScreenState extends State<AddCardScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>DeleteCartScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DeleteCartScreen()),
+          );
           onItemTapped(2);
         },
         child: const Icon(Icons.shopping_cart, color: Colors.white, size: 30),
